@@ -43,6 +43,7 @@ namespace TextRPG_Borkenthron
             // 
             // picBMainHero
             // 
+            this.picBMainHero.BackColor = System.Drawing.Color.Transparent;
             this.picBMainHero.Location = new System.Drawing.Point(194, 321);
             this.picBMainHero.Name = "picBMainHero";
             this.picBMainHero.Size = new System.Drawing.Size(100, 124);
@@ -51,14 +52,16 @@ namespace TextRPG_Borkenthron
             // 
             // PicBMana
             // 
+            this.PicBMana.BackColor = System.Drawing.Color.Transparent;
             this.PicBMana.Location = new System.Drawing.Point(11, 48);
             this.PicBMana.Name = "PicBMana";
-            this.PicBMana.Size = new System.Drawing.Size(33, 29);
+            this.PicBMana.Size = new System.Drawing.Size(33, 30);
             this.PicBMana.TabIndex = 1;
             this.PicBMana.TabStop = false;
             // 
             // picBHealth
             // 
+            this.picBHealth.BackColor = System.Drawing.Color.Transparent;
             this.picBHealth.Location = new System.Drawing.Point(12, 12);
             this.picBHealth.Name = "picBHealth";
             this.picBHealth.Size = new System.Drawing.Size(32, 30);
@@ -67,6 +70,7 @@ namespace TextRPG_Borkenthron
             // 
             // picBInventory
             // 
+            this.picBInventory.BackColor = System.Drawing.Color.Transparent;
             this.picBInventory.Location = new System.Drawing.Point(12, 402);
             this.picBInventory.Name = "picBInventory";
             this.picBInventory.Size = new System.Drawing.Size(141, 30);
@@ -75,6 +79,7 @@ namespace TextRPG_Borkenthron
             // 
             // PicBGoFront
             // 
+            this.PicBGoFront.BackColor = System.Drawing.Color.Transparent;
             this.PicBGoFront.Location = new System.Drawing.Point(194, 12);
             this.PicBGoFront.Name = "PicBGoFront";
             this.PicBGoFront.Size = new System.Drawing.Size(175, 35);
@@ -94,6 +99,7 @@ namespace TextRPG_Borkenthron
             this.Controls.Add(this.picBMainHero);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameStart";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameStart";
             ((System.ComponentModel.ISupportInitialize)(this.picBMainHero)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicBMana)).EndInit();

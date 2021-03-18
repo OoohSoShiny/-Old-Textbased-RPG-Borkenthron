@@ -20,7 +20,6 @@ namespace TextRPG_Borkenthron
             InitializeComponent();
             mainVariables = new MainVariables();
             mainMethods = new MainMethods();
-            characterCreation = new CharacterCreation();
 
             Initialize_MainMenu();
         }
@@ -29,7 +28,7 @@ namespace TextRPG_Borkenthron
         {
             Environment.Exit(0);
         }
-
+        //Filling the pictures of the main menu
         private void Initialize_MainMenu()
         {
             mainMethods.Form_Background_Change(this, mainVariables.MainMenu_Background);
@@ -38,9 +37,11 @@ namespace TextRPG_Borkenthron
             mainMethods.Fill_PictureBox(picBLeaveGame, mainVariables.MainMenu_ExitGame);
         }
 
+        //Goes to the CharacterCreator
         private void picBNewGame_Click(object sender, EventArgs e)
         {
             this.Hide();
+            characterCreation = new CharacterCreation();
             characterCreation.Show();
         }
     }

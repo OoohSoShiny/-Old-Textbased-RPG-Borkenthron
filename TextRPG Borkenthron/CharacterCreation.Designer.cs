@@ -39,7 +39,7 @@ namespace TextRPG_Borkenthron
             this.lblCCStatsAgiCurrent = new System.Windows.Forms.Label();
             this.lblCharacterCreationNameFixed = new System.Windows.Forms.Label();
             this.txtCharacterCreationName = new System.Windows.Forms.TextBox();
-            this.lblCCStatsPointLeftCurrend = new System.Windows.Forms.Label();
+            this.lblCCStatsPointLeftCurrent = new System.Windows.Forms.Label();
             this.picBCCStrPlus = new System.Windows.Forms.PictureBox();
             this.picBCCStrMinus = new System.Windows.Forms.PictureBox();
             this.picBCCIntPlus = new System.Windows.Forms.PictureBox();
@@ -170,16 +170,16 @@ namespace TextRPG_Borkenthron
             this.txtCharacterCreationName.Size = new System.Drawing.Size(100, 13);
             this.txtCharacterCreationName.TabIndex = 11;
             // 
-            // lblCCStatsPointLeftCurrend
+            // lblCCStatsPointLeftCurrent
             // 
-            this.lblCCStatsPointLeftCurrend.AutoSize = true;
-            this.lblCCStatsPointLeftCurrend.BackColor = System.Drawing.Color.Transparent;
-            this.lblCCStatsPointLeftCurrend.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCCStatsPointLeftCurrend.Location = new System.Drawing.Point(90, 13);
-            this.lblCCStatsPointLeftCurrend.Name = "lblCCStatsPointLeftCurrend";
-            this.lblCCStatsPointLeftCurrend.Size = new System.Drawing.Size(14, 13);
-            this.lblCCStatsPointLeftCurrend.TabIndex = 13;
-            this.lblCCStatsPointLeftCurrend.Text = "5";
+            this.lblCCStatsPointLeftCurrent.AutoSize = true;
+            this.lblCCStatsPointLeftCurrent.BackColor = System.Drawing.Color.Transparent;
+            this.lblCCStatsPointLeftCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCCStatsPointLeftCurrent.Location = new System.Drawing.Point(90, 13);
+            this.lblCCStatsPointLeftCurrent.Name = "lblCCStatsPointLeftCurrent";
+            this.lblCCStatsPointLeftCurrent.Size = new System.Drawing.Size(14, 13);
+            this.lblCCStatsPointLeftCurrent.TabIndex = 13;
+            this.lblCCStatsPointLeftCurrent.Text = "5";
             // 
             // picBCCStrPlus
             // 
@@ -246,6 +246,7 @@ namespace TextRPG_Borkenthron
             // 
             // picBCCCharPrevious
             // 
+            this.picBCCCharPrevious.Enabled = false;
             this.picBCCCharPrevious.Location = new System.Drawing.Point(228, 152);
             this.picBCCCharPrevious.Name = "picBCCCharPrevious";
             this.picBCCCharPrevious.Size = new System.Drawing.Size(50, 30);
@@ -287,7 +288,7 @@ namespace TextRPG_Borkenthron
             this.Controls.Add(this.picBCCIntPlus);
             this.Controls.Add(this.picBCCStrMinus);
             this.Controls.Add(this.picBCCStrPlus);
-            this.Controls.Add(this.lblCCStatsPointLeftCurrend);
+            this.Controls.Add(this.lblCCStatsPointLeftCurrent);
             this.Controls.Add(this.txtCharacterCreationName);
             this.Controls.Add(this.lblCharacterCreationNameFixed);
             this.Controls.Add(this.lblCCStatsAgiCurrent);
@@ -300,6 +301,7 @@ namespace TextRPG_Borkenthron
             this.Controls.Add(this.picBCharacterCreation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CharacterCreation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CharacterCreation";
             ((System.ComponentModel.ISupportInitialize)(this.picBCharacterCreation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBCCStrPlus)).EndInit();
@@ -329,7 +331,7 @@ namespace TextRPG_Borkenthron
         private System.Windows.Forms.Label lblCCStatsAgiCurrent;
         private System.Windows.Forms.Label lblCharacterCreationNameFixed;
         private System.Windows.Forms.TextBox txtCharacterCreationName;
-        private System.Windows.Forms.Label lblCCStatsPointLeftCurrend;
+        private System.Windows.Forms.Label lblCCStatsPointLeftCurrent;
         private System.Windows.Forms.PictureBox picBCCStrPlus;
         private System.Windows.Forms.PictureBox picBCCStrMinus;
         private System.Windows.Forms.PictureBox picBCCIntPlus;

@@ -66,15 +66,34 @@ namespace TextRPG_Borkenthron
 
         public Bitmap CharacterCreation_Background
         { get { return ccBackground; } }
+
+        //First Screen Pictures
+        readonly Bitmap firstScreenBackground = new Bitmap(@"Backgrounds\GrassBackground500440.jpg");
+
+        public Bitmap FirstScreen_Background
+        { get { return firstScreenBackground; } }
+
+        //Standard UI
+
+        readonly Bitmap uiheart = new Bitmap(@"Icons\LifeHeart.png");
+        readonly Bitmap uiCrystal = new Bitmap(@"Icons\BlueCrystal.png");
+
+        public Bitmap UserInterface_Heart
+        { get { return uiheart; } }
+        public Bitmap UserInterface_Crystal
+        { get { return uiCrystal; } }
+
         #endregion
 
-        //Character stats
+        //Character stats & name
 
         int characterStr = 3;
         int characterInt = 3;
         int characterAgi = 3;
 
-        string characterName = "";
+        int characterAP = 5;
+
+        string characterName;
 
         public int Character_Strength
         { get { return characterStr; } set { characterStr = value; } }
@@ -82,5 +101,18 @@ namespace TextRPG_Borkenthron
         { get { return characterInt; } set { characterInt = value; } }
         public int Character_Agility
         { get { return characterAgi; } set { characterAgi = value; } }
+
+        public int Character_AbilityPoints
+        { get { return characterAP; } set { characterAP = value; } }
+
+        public string Character_Name
+        { get { return characterName; } set { characterName = value; } }
+
+        int characterPic = 1;
+
+        public int Character_Picture
+        { get { return characterPic; } set { characterPic = value; } }
+
+        
     }
 }
