@@ -1,0 +1,12 @@
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\bin\Debug\TextRPG Borkenthron.exe.config
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\bin\Debug\TextRPG Borkenthron.exe
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\bin\Debug\TextRPG Borkenthron.pdb
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.csprojAssemblyReference.cache
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.MainFrame.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Properties.Resources.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.csproj.GenerateResource.cache
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.csproj.CoreCompileInputs.cache
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.exe
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.pdb
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.GameStart.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.CharacterCreation.resources
