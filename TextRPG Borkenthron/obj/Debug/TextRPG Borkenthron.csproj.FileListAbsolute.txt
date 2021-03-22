@@ -10,3 +10,20 @@ C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Deb
 C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.pdb
 C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.GameStart.resources
 C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.CharacterCreation.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Inventory.resources
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\bin\Debug\TextRPG Borkenthron.exe.config
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\bin\Debug\TextRPG Borkenthron.exe
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\bin\Debug\TextRPG Borkenthron.pdb
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.csprojAssemblyReference.cache
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.CharacterCreation.resources
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.MainFrame.resources
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.GameStart.resources
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Inventory.resources
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Properties.Resources.resources
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.csproj.GenerateResource.cache
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.csproj.CoreCompileInputs.cache
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.exe
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.pdb
+C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.IngameMenu.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Dialogbox.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.IngameMenu.resources

@@ -19,12 +19,12 @@ namespace TextRPG_Borkenthron
 
 
         //Fills the character Creator with pics and initializes the forms he needs access to
-        public CharacterCreation()
+        public CharacterCreation(MainFrame givenMainFrame, MainMethods givenMainMethods, MainVariables givenMainVariabes)  
         {
             InitializeComponent();
-            mainVariables = new MainVariables();
-            mainMethods = new MainMethods();
-            firstScreen = new GameStart();
+            mainVariables = givenMainVariabes;
+            mainMethods = givenMainMethods;
+            mainFrame = givenMainFrame;
 
             mainMethods.Fill_PictureBox(picBCCStrPlus, mainVariables.CharacterCreation_AttributeUp);
             mainMethods.Fill_PictureBox(picBCCAgiPlus, mainVariables.CharacterCreation_AttributeUp);
@@ -38,19 +38,17 @@ namespace TextRPG_Borkenthron
             mainMethods.Fill_PictureBox(picBCCCharNext, mainVariables.CharacterCreation_PicNext);
             mainMethods.Fill_PictureBox(picBCharacterCreation, mainVariables.MainCharacter_OnePic);
 
-            mainMethods.Form_Background_Change(this, mainVariables.CharacterCreation_Background);
-
-            
+            mainMethods.Form_Background_Change(this, mainVariables.CharacterCreation_Background);            
         }
 
+        //From the Character Creation back to the main screen
         private void picBCCBack_Click(object sender, EventArgs e)
         {
-            mainFrame = new MainFrame();
             this.Hide();
             mainFrame.Show();
-            this.Close();
         }
 
+        //From the Character Creator to actually starting the game
         private void picBCCSend_Click(object sender, EventArgs e)
         {
             if(txtCharacterCreationName.Text == "")
@@ -59,13 +57,8 @@ namespace TextRPG_Borkenthron
             }
             else
             {
-                Globals.characterStr = mainVariables.Character_Strength;
-                Globals.characterAgi = mainVariables.Character_Agility;
-                Globals.characterInt = mainVariables.Character_Intelligence;
-                Globals.CharacterPic = mainVariables.Character_Picture;
-                Globals.characterName = txtCharacterCreationName.Text;
-
-                firstScreen = new GameStart();
+                mainVariables.Character_Name = txtCharacterCreationName.Text;
+                firstScreen = new GameStart(mainMethods, mainVariables, mainFrame);
                 firstScreen.Show();
                 this.Close();
             }
@@ -102,7 +95,6 @@ namespace TextRPG_Borkenthron
             if (mainVariables.Character_AbilityPoints > 0)
             {
                 mainVariables.Character_Strength = mainMethods.Change_Stats(mainVariables.Character_Strength, 1, '+', lblCCStatsStrCurrent, lblCCStatsPointLeftCurrent);
-                mainVariables.Character_AbilityPoints--;
             }
         }
 
@@ -111,7 +103,6 @@ namespace TextRPG_Borkenthron
             if (mainVariables.Character_Strength > 1)
             {
                 mainVariables.Character_Strength = mainMethods.Change_Stats(mainVariables.Character_Strength, 1, '-', lblCCStatsStrCurrent, lblCCStatsPointLeftCurrent);
-                mainVariables.Character_AbilityPoints++;
             }
         }
 
@@ -120,7 +111,6 @@ namespace TextRPG_Borkenthron
             if (mainVariables.Character_AbilityPoints > 0)
             {
                 mainVariables.Character_Intelligence = mainMethods.Change_Stats(mainVariables.Character_Intelligence, 1, '+', lblCCStatsIntCurrent, lblCCStatsPointLeftCurrent);
-                mainVariables.Character_AbilityPoints--;
             }
         }
 
@@ -129,17 +119,14 @@ namespace TextRPG_Borkenthron
             if (mainVariables.Character_Intelligence > 1)
             {
                 mainVariables.Character_Intelligence = mainMethods.Change_Stats(mainVariables.Character_Intelligence, 1, '-', lblCCStatsIntCurrent, lblCCStatsPointLeftCurrent);
-                mainVariables.Character_AbilityPoints++;
             }
         }
-
 
         private void picBCCAgiPlus_Click(object sender, EventArgs e)
         {
             if (mainVariables.Character_AbilityPoints > 0)
             {
                 mainVariables.Character_Agility = mainMethods.Change_Stats(mainVariables.Character_Agility, 1, '+', lblCCStatsAgiCurrent, lblCCStatsPointLeftCurrent);
-                mainVariables.Character_AbilityPoints--;
             }
         }
 
@@ -148,7 +135,6 @@ namespace TextRPG_Borkenthron
             if (mainVariables.Character_Agility > 1)
             {
                 mainVariables.Character_Agility = mainMethods.Change_Stats(mainVariables.Character_Agility, 1, '-', lblCCStatsAgiCurrent, lblCCStatsPointLeftCurrent);
-                mainVariables.Character_AbilityPoints++;
             }
         }
     }

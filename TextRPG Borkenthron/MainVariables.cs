@@ -4,21 +4,55 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TextRPG_Borkenthron
 {
-    class MainVariables
-    {
+    public class MainVariables
+    {   
+        //Allround variables
+        Random randomizer = new Random();
+        //
+        SoundPlayer musicSoundPlayer = new SoundPlayer(@"Soundfiles\Warm_Light.wav");
+        public SoundPlayer Music_Soundplayer
+        { get { return musicSoundPlayer; } set { musicSoundPlayer = value; } }
+        public Random Random_Number
+        { get { return randomizer; } set { randomizer = value; } }
+        bool focusInventory = false;
+        bool focusDialog = false;
+        bool focusIngameMenu = false;
+        public bool UserInterface_InventoryActive
+        { get { return focusInventory; } set { focusInventory = value; } }
+        public bool UserInterface_IngameMenuActive
+        { get { return focusIngameMenu; } set { focusIngameMenu = value; } }
+        public bool UserInterface_DialogboxActive
+        { get { return focusDialog; } set { focusDialog = value; } }
+
+        //The picb array given to the mothod before opening the dialog box
+        PictureBox[] pictureBoxArray;
+
+        public PictureBox[] Picturebox_Array
+        { get { return pictureBoxArray; } set { pictureBoxArray = value; } }
+
+        //The integer to progress in the storyline
+        int storyLineProgressor = 1;
+        public int StoryLine_Progress
+        { get { return storyLineProgressor; } set { storyLineProgressor = value; } }
+
+
         #region Bitmaps
-        //Main Menu pictures
+        //Main Menu pictures, font used: LittleLordFontleroy
         readonly Bitmap mainMenuBackground = new Bitmap(@"Backgrounds\MenuBackground300200.jpg");
         readonly Bitmap mainMenuNewGame = new Bitmap(@"Icons\mainMenuNewGame.png");
         readonly Bitmap mainMenuLoadGame = new Bitmap(@"Icons\mainMenuLoadGame.png");
         readonly Bitmap mainMenuExitGame = new Bitmap(@"Icons\mainMenuExitGame.png");
+        readonly Bitmap mainMenuNamePlate = new Bitmap(@"Icons\mainMenuGameName.png");
 
+        public Bitmap MainMenu_NamePlate
+        { get { return mainMenuNamePlate; } }
         public Bitmap MainMenu_Background //284; 219
         { get { return mainMenuBackground; } }
         public Bitmap MainMenu_NewGameIcon //259; 50
@@ -29,7 +63,6 @@ namespace TextRPG_Borkenthron
         { get { return mainMenuExitGame; } }
 
         //Main Character Pictures 100; 124
-
         readonly Bitmap mainCharacterOne = new Bitmap(@"Characters\MainCharOne.png");
         readonly Bitmap mainCharacterTwo = new Bitmap(@"Characters\MainHeroTwo.png");
         readonly Bitmap mainCharacterThree = new Bitmap(@"Characters\MainHeroThree.png");
@@ -63,30 +96,65 @@ namespace TextRPG_Borkenthron
         { get { return ccCancelAdventure; } }
 
         readonly Bitmap ccBackground = new Bitmap(@"Backgrounds\CCBackground.jpg");
-
         public Bitmap CharacterCreation_Background
         { get { return ccBackground; } }
 
         //First Screen Pictures
         readonly Bitmap firstScreenBackground = new Bitmap(@"Backgrounds\GrassBackground500440.jpg");
-
         public Bitmap FirstScreen_Background
         { get { return firstScreenBackground; } }
 
         //Standard UI
-
         readonly Bitmap uiheart = new Bitmap(@"Icons\LifeHeart.png");
         readonly Bitmap uiCrystal = new Bitmap(@"Icons\BlueCrystal.png");
+        readonly Bitmap uiInventory = new Bitmap(@"Icons\Inventar.png");
+        readonly Bitmap uiMenu = new Bitmap(@"Icons\uiIconMenu.png");
+        readonly Bitmap uiBackToMain = new Bitmap(@"Icons\ButtonToMainMenu.png");
+        readonly Bitmap uiIngameMenuBackground = new Bitmap(@"Backgrounds\IngameMenuBackground.jpg");
 
+        public Bitmap UserInterface_BackToMainMenu
+        { get { return uiBackToMain; } }
         public Bitmap UserInterface_Heart
         { get { return uiheart; } }
         public Bitmap UserInterface_Crystal
         { get { return uiCrystal; } }
+        public Bitmap UserInterface_Inventory
+        { get { return uiInventory; } }
+        public Bitmap UserInterface_Menu
+        { get { return uiMenu; } }
+        public Bitmap UserInterface_IngameMenuBackground
+        { get { return uiIngameMenuBackground; } }
+
+        readonly Bitmap inventoryBackground = new Bitmap(@"Backgrounds\inventoryBasicNew.png");
+        readonly Bitmap inventoryClose = new Bitmap(@"Icons\InventoryClose.png");
+        public Bitmap UserInterface_InventoryBackground
+        {get { return inventoryBackground; } }
+        public Bitmap UserInterface_InventoryClose
+        { get { return inventoryClose; } }
+
+
+        //IngameMenu
+        readonly Bitmap saveGame = new Bitmap(@"Icons\MenuSaveGame.png");
+        readonly Bitmap backToGame = new Bitmap(@"Icons\UIBackToGame.png");
+
+        public Bitmap UserInterface_SaveGame
+        { get { return saveGame; } }
+        public Bitmap UserInterface_BackToGame
+        { get { return backToGame; } }
+
+        //Dialogwindow
+        readonly Bitmap dialogBoxForward = new Bitmap(@"Icons\DialogForward.png");
+        readonly Bitmap dialogBoxBackground = new Bitmap(@"Backgrounds\DialogboxBackground.png");
+        public Bitmap UserInterface_DialogboxBackground
+        { get { return dialogBoxBackground; } }
+        public Bitmap UserInterface_DialogForward
+        { get { return dialogBoxForward; } }
 
         #endregion
-
-        //Character stats & name
-
+        //Bitmaps for Menus and UI ---- Bitmaps for Items and Characters are listed under that specific Item/Character.
+        #region Character
+        //Maincharacter stats & name
+        int honorPoints = 0;
         int characterStr = 3;
         int characterInt = 3;
         int characterAgi = 3;
@@ -95,6 +163,8 @@ namespace TextRPG_Borkenthron
 
         string characterName;
 
+        public int Character_Honor
+        { get { return honorPoints; } set { honorPoints = value; } }
         public int Character_Strength
         { get { return characterStr; } set { characterStr = value; } }
         public int Character_Intelligence
@@ -109,10 +179,151 @@ namespace TextRPG_Borkenthron
         { get { return characterName; } set { characterName = value; } }
 
         int characterPic = 1;
-
         public int Character_Picture
         { get { return characterPic; } set { characterPic = value; } }
 
+        private int characterHealth = 10;
+        private int characterCrystals = 10;
+
+        public int Character_Health
+        { get { return characterHealth; } set { characterHealth = value; } }
+        public int Character_Crystals
+        { get { return characterCrystals; } set { characterCrystals = value; } }
+        #endregion
+
+        #region Items
+        //Items (String is Name_Count_Tooltip, and a bitmap for the item)
+        List<string> itemList = new List<string>();
+        List<Bitmap> itemBitmapList = new List<Bitmap>();
+        public List<string> Items_List
+        { get { return itemList; } set { itemList = value; } }
+        public List<Bitmap> Items_Bitmap_List
+        { get { return itemBitmapList; } set { itemBitmapList = value; } }
+
+        //Single Flower
+        readonly Bitmap singleFlower = new Bitmap(@"Icons\SingleFlower.png");
+        public Bitmap Items_SingleFlowerBM
+        { get { return singleFlower; } }
+
+        private string itemSingleFlower = "Single Flower_0_Eine einzelne, hübsche Blume";
+        public string Items_SingleFlower
+        { get { return itemSingleFlower; } set { itemSingleFlower = value; } }
+
+        //FlowerCircle
+        readonly Bitmap itemFlowerCircle = new Bitmap(@"Icons\FlowerCircle.png");
+        public Bitmap Items_FlowerCircleBM
+        { get { return itemFlowerCircle; } }
+
+        private string flowerCircle = "Flower Circle_0_Ein wunderschöner Blumenkranz, einer Göttin würdig.";
+        public string Items_FlowerCircle
+        { get { return flowerCircle; } set { flowerCircle = value; } }
+
+        //Sword
+        readonly Bitmap itemSword = new Bitmap(@"Icons\sword.png");
+        string sword = "Sword_0_Ein etwas stumpfes, aber noch brauchbares Schwert";
+
+        public Bitmap Items_SwordBM
+        { get { return itemSword; } }
+        public string Items_Sword
+        { get { return sword; } set { sword = value; } }
+
+        //Finished Test
+        readonly Bitmap itemTest = new Bitmap(@"Icons\finishedTest.png");
+        string finishedTest = "Finished Test_0_Ein Test, bei dem alle Antworten korrekt ausgefüllt wurden";
+
+        public Bitmap Items_FinishedTestBM
+        { get { return itemTest; } }
+        public string Items_FinishedTest
+        { get { return finishedTest; } set { finishedTest = value; } }
+
+        //Rope
+        readonly Bitmap rope = new Bitmap(@"Icons\rope.png");
+        string itemRope = "Rope_0_Ein festes Seil, das man sehr gut greifen kann";
+
+        public Bitmap Items_RopeBM
+        { get { return rope; } }
+        public string Items_Rope
+        { get { return itemRope; } set { itemRope = value; } }
+
+        //Super Axe
+        readonly Bitmap superAxe = new Bitmap(@"Icons\superAxe.png");
+        string itemSuperAxe = "Superaxe_0_Eine mächtige Axt, die aus Holz... Kleinholz macht";
+
+        public Bitmap Items_SuperAxeBM
+        { get { return superAxe; } }
+        public string Items_SuperAxe
+        { get { return itemSuperAxe; } set { itemSuperAxe = value; } }
+
+        //Chicken leg
+        readonly Bitmap chickenLeg = new Bitmap(@"Icons\chickenLeg.png");
+        string itemChickenLeg = "Chicken Leg_0_Ein leckerer Hühnchenschenkel";
+
+        public Bitmap Items_ChickenLegBM
+        { get { return chickenLeg; } }
+        public string Items_ChickenLeg
+        { get { return itemChickenLeg; } set { itemChickenLeg = value; } }
+
+        //Mirror
+        readonly Bitmap mirror = new Bitmap(@"Icons\mirror.png");
+        string itemMirror = "Mirror_0_Ein einfacher Handspiegel";
+
+        public Bitmap Items_MirrorBM
+        { get { return mirror; } }
+        public string Items_Mirror
+        { get { return itemMirror; } set { itemMirror = value; } }
+
+        //Giant Nut
+        readonly Bitmap giantNut = new Bitmap(@"Icons\nut.png");
+        string itemGiantNut = "Giant Nut_0_Nüffe? Welfe Nüffe?";
+
+        public Bitmap Items_GiantNutBm
+        { get { return giantNut; } }
+        public string Items_GiantNut
+        { get { return itemGiantNut; } set { itemGiantNut = value; } }
+
+
+        //HealthPotion
+        string healthPotions = "Health Potion_0_Heiltrank, heilt um 5 Lebenspunkte";
+        readonly Bitmap healthPotionBM = new Bitmap(@"Icons\HealthPotion.png");
+        public string Items_HealthPotion
+        { get { return healthPotions; } set { healthPotions = value; } }
+
+        public Bitmap Items_HealthPotionBM
+        { get { return healthPotionBM; } }
+        #endregion
         
+        //Characters
+        //Marie
+        readonly Bitmap mariaBM = new Bitmap(@"Characters\TextRPGMaria.png");
+        readonly string mariaName = "Maria";
+        int mariaProgression = 0;
+
+        public Bitmap Characters_Maria_Bitmap
+        { get { return mariaBM; } }
+        public string Characters_Maria_Name
+        { get { return mariaName; } }
+        public int Characters_Maria_Progression
+        { get { return mariaProgression; } set { mariaProgression = value; } }
+
+
+        //Variables for Specific scenes
+
+        //First Scenes
+        bool collectFlower = false;
+        public bool FirstScene_CollectFlower
+        { get { return collectFlower; } set { collectFlower = value; } }
+        int collectFlowerCount = 0;
+        public int FirstScene_CollectFlowerCount
+        { get { return collectFlowerCount; } set { collectFlowerCount = value; } }
+
+        //Bool for Tutorial
+        bool tutorialbool = true;
+
+        public bool Tutorial_Bool
+        { get { return tutorialbool; } set { tutorialbool = value; } }
+
+        int tutorialCounter = 0;
+        public int Tutorial_TimeCounter
+        { get { return tutorialCounter; } set { tutorialCounter = value; } }
     }
 }

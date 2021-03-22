@@ -52,6 +52,12 @@
     <Compile Include="CharacterCreation.Designer.cs">
       <DependentUpon>CharacterCreation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogbox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogbox.Designer.cs">
+      <DependentUpon>Dialogbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,7 +70,18 @@
     <Compile Include="GameStart.Designer.cs">
       <DependentUpon>GameStart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Globals.cs" />
+    <Compile Include="IngameMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IngameMenu.Designer.cs">
+      <DependentUpon>IngameMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory.Designer.cs">
+      <DependentUpon>Inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMethods.cs" />
     <Compile Include="MainVariables.cs" />
     <Compile Include="Program.cs" />
@@ -72,11 +89,20 @@
     <EmbeddedResource Include="CharacterCreation.resx">
       <DependentUpon>CharacterCreation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogbox.resx">
+      <DependentUpon>Dialogbox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameStart.resx">
       <DependentUpon>GameStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IngameMenu.resx">
+      <DependentUpon>IngameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
