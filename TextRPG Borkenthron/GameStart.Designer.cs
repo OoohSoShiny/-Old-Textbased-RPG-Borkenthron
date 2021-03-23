@@ -53,6 +53,8 @@ namespace TextRPG_Borkenthron
             this.picBGoblin = new System.Windows.Forms.PictureBox();
             this.picBJack = new System.Windows.Forms.PictureBox();
             this.picBKitten = new System.Windows.Forms.PictureBox();
+            this.picBStuckKitten = new System.Windows.Forms.PictureBox();
+            this.picBJorn = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBMainHero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicBMana)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBHealth)).BeginInit();
@@ -73,6 +75,8 @@ namespace TextRPG_Borkenthron
             ((System.ComponentModel.ISupportInitialize)(this.picBGoblin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBJack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBKitten)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBStuckKitten)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBJorn)).BeginInit();
             this.SuspendLayout();
             // 
             // picBMainHero
@@ -295,7 +299,7 @@ namespace TextRPG_Borkenthron
             // picBJack
             // 
             this.picBJack.BackColor = System.Drawing.Color.Transparent;
-            this.picBJack.Location = new System.Drawing.Point(88, 175);
+            this.picBJack.Location = new System.Drawing.Point(88, 164);
             this.picBJack.Name = "picBJack";
             this.picBJack.Size = new System.Drawing.Size(50, 70);
             this.picBJack.TabIndex = 21;
@@ -306,7 +310,7 @@ namespace TextRPG_Borkenthron
             // picBKitten
             // 
             this.picBKitten.BackColor = System.Drawing.Color.Transparent;
-            this.picBKitten.Location = new System.Drawing.Point(340, 12);
+            this.picBKitten.Location = new System.Drawing.Point(112, 7);
             this.picBKitten.Name = "picBKitten";
             this.picBKitten.Size = new System.Drawing.Size(40, 40);
             this.picBKitten.TabIndex = 22;
@@ -314,12 +318,36 @@ namespace TextRPG_Borkenthron
             this.picBKitten.Visible = false;
             this.picBKitten.Click += new System.EventHandler(this.picBKitten_Click);
             // 
+            // picBStuckKitten
+            // 
+            this.picBStuckKitten.BackColor = System.Drawing.Color.Transparent;
+            this.picBStuckKitten.Location = new System.Drawing.Point(125, 94);
+            this.picBStuckKitten.Name = "picBStuckKitten";
+            this.picBStuckKitten.Size = new System.Drawing.Size(40, 40);
+            this.picBStuckKitten.TabIndex = 23;
+            this.picBStuckKitten.TabStop = false;
+            this.picBStuckKitten.Visible = false;
+            this.picBStuckKitten.Click += new System.EventHandler(this.picBStuckKitten_Click);
+            // 
+            // picBJorn
+            // 
+            this.picBJorn.BackColor = System.Drawing.Color.Transparent;
+            this.picBJorn.Location = new System.Drawing.Point(349, 239);
+            this.picBJorn.Name = "picBJorn";
+            this.picBJorn.Size = new System.Drawing.Size(50, 70);
+            this.picBJorn.TabIndex = 24;
+            this.picBJorn.TabStop = false;
+            this.picBJorn.Visible = false;
+            this.picBJorn.Click += new System.EventHandler(this.picBJorn_Click);
+            // 
             // GameStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 440);
             this.ControlBox = false;
+            this.Controls.Add(this.picBJorn);
+            this.Controls.Add(this.picBStuckKitten);
             this.Controls.Add(this.picBKitten);
             this.Controls.Add(this.picBJack);
             this.Controls.Add(this.picBGoblin);
@@ -367,6 +395,8 @@ namespace TextRPG_Borkenthron
             ((System.ComponentModel.ISupportInitialize)(this.picBGoblin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBJack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBKitten)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBStuckKitten)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBJorn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,5 +427,7 @@ namespace TextRPG_Borkenthron
         private System.Windows.Forms.PictureBox picBGoblin;
         private System.Windows.Forms.PictureBox picBJack;
         private System.Windows.Forms.PictureBox picBKitten;
+        private System.Windows.Forms.PictureBox picBStuckKitten;
+        private System.Windows.Forms.PictureBox picBJorn;
     }
 }

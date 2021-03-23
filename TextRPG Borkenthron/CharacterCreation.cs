@@ -26,6 +26,8 @@ namespace TextRPG_Borkenthron
             mainMethods = givenMainMethods;
             mainFrame = givenMainFrame;
 
+            mainMethods.Reset_Story_Variables();
+
             mainMethods.Fill_PictureBox(picBCCStrPlus, mainVariables.CharacterCreation_AttributeUp);
             mainMethods.Fill_PictureBox(picBCCAgiPlus, mainVariables.CharacterCreation_AttributeUp);
             mainMethods.Fill_PictureBox(picBCCIntPlus, mainVariables.CharacterCreation_AttributeUp);

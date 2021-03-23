@@ -21,6 +21,8 @@ namespace TextRPG_Borkenthron
 
         public PictureBox Characters_KittenPictureBox
         { get { return picBKitten; } set { picBKitten = value; } }
+        public PictureBox Characters_StuckKitten
+        { get { return picBStuckKitten; } set { picBStuckKitten = value; } }
 
         //default start when game is loaded via start new game
         public GameStart(MainMethods givenMainMethods, MainVariables givenMainVariables, MainFrame givenMainFrame)
@@ -36,6 +38,7 @@ namespace TextRPG_Borkenthron
             mainFrame = givenMainFrame;
             inGameMenu = new IngameMenu(mainVariables, mainMethods, this, mainFrame);
             oneSecondTimer = new Timer();
+            lblUiMana.Text = mainVariables.Character_Crystals.ToString();
 
             try
             { mainVariables.Music_Soundplayer.Stop(); }
@@ -48,17 +51,20 @@ namespace TextRPG_Borkenthron
                     mainMethods.Form_Background_Change(this, mainVariables.FirstScreen_Background);
                     mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
                     mainMethods.Fill_PictureBox(picBSideCharOne, mainVariables.Characters_Maria_Bitmap); picBSideCharOne.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBGoFront, mainVariables.UserInterface_TowardsForest);
-                    mainMethods.Fill_PictureBox(PicBFlower1, mainVariables.Items_SingleFlowerBM); PicBFlower1.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower2, mainVariables.Items_SingleFlowerBM); PicBFlower2.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower3, mainVariables.Items_SingleFlowerBM); PicBFlower3.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower4, mainVariables.Items_SingleFlowerBM); PicBFlower4.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower5, mainVariables.Items_SingleFlowerBM); PicBFlower5.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower6, mainVariables.Items_SingleFlowerBM); PicBFlower6.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower7, mainVariables.Items_SingleFlowerBM); PicBFlower7.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower8, mainVariables.Items_SingleFlowerBM); PicBFlower8.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower9, mainVariables.Items_SingleFlowerBM); PicBFlower9.Visible = true;
-                    mainMethods.Fill_PictureBox(PicBFlower10, mainVariables.Items_SingleFlowerBM); PicBFlower10.Visible = true;                    
+                    if (mainVariables.Characters_Maria_Progression != 10)
+                    {
+                        mainMethods.Fill_PictureBox(PicBGoFront, mainVariables.UserInterface_TowardsForest);
+                        mainMethods.Fill_PictureBox(PicBFlower1, mainVariables.Items_SingleFlowerBM); PicBFlower1.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower2, mainVariables.Items_SingleFlowerBM); PicBFlower2.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower3, mainVariables.Items_SingleFlowerBM); PicBFlower3.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower4, mainVariables.Items_SingleFlowerBM); PicBFlower4.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower5, mainVariables.Items_SingleFlowerBM); PicBFlower5.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower6, mainVariables.Items_SingleFlowerBM); PicBFlower6.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower7, mainVariables.Items_SingleFlowerBM); PicBFlower7.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower8, mainVariables.Items_SingleFlowerBM); PicBFlower8.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower9, mainVariables.Items_SingleFlowerBM); PicBFlower9.Visible = true;
+                        mainMethods.Fill_PictureBox(PicBFlower10, mainVariables.Items_SingleFlowerBM); PicBFlower10.Visible = true;
+                    }
                     break;
             
             //case 2 is forest
@@ -76,6 +82,8 @@ namespace TextRPG_Borkenthron
                     mainMethods.Fill_PictureBox(picBJack, mainVariables.Characters_JackBM);
                     if (!mainVariables.Characters_KittenClicked)
                     { mainMethods.Fill_PictureBox(picBKitten, mainVariables.Characters_KittenBM); }
+                    if (!mainVariables.Characters_JacksKittenSaved)
+                    { mainMethods.Fill_PictureBox(picBStuckKitten, mainVariables.Characters_StuckKittenBM); }
                     break;
             }
             mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
@@ -85,6 +93,7 @@ namespace TextRPG_Borkenthron
             mainMethods.Fill_PictureBox(picBMenu, mainVariables.UserInterface_Menu);
 
             lblUiHealth.Text = mainVariables.Character_Health.ToString();
+            // 0) Flowercircle 1) Health potion 2) Sword 3) Finished test 4) Rope 5) Super axe 6) Chicken leg 7) Mirror 8) Giant nut 9) Single flower
 
             //Adding items to the itemlist and adding bitmaps for those item in a second List
             mainVariables.Items_List.Add(mainVariables.Items_FlowerCircle); mainVariables.Items_List.Add(mainVariables.Items_HealthPotion); mainVariables.Items_List.Add(mainVariables.Items_Sword);
@@ -245,7 +254,7 @@ namespace TextRPG_Borkenthron
         //Clicking on the Goblin
         private void picBGoblin_Click(object sender, EventArgs e)
         {
-            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Marie", this, mainFrame);
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Goblin", this, mainFrame);
             main_Dialog.Show();
             mainVariables.UserInterface_DialogboxActive = true;
         }
@@ -263,16 +272,28 @@ namespace TextRPG_Borkenthron
                     break;
             }
         }
-
+        //The amazing flying kitty
         private void picBKitten_Click(object sender, EventArgs e)
         {
             main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Kitten", this, mainFrame);
             main_Dialog.Show();
         }
-
+        //Jack the kittenless
         private void picBJack_Click(object sender, EventArgs e)
         {
             main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Jack", this, mainFrame);
+            main_Dialog.Show();
+        }
+        //stuck kitten
+        private void picBStuckKitten_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "StuckKitten", this, mainFrame);
+            main_Dialog.Show();
+        }
+
+        private void picBJorn_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Jorn", this, mainFrame);
             main_Dialog.Show();
         }
     }

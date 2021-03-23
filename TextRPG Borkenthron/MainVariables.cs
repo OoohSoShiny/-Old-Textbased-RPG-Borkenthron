@@ -289,7 +289,6 @@ namespace TextRPG_Borkenthron
         //Characters
         //Marie
         readonly Bitmap mariaBM = new Bitmap(@"Characters\TextRPGMaria.png");
-        readonly string mariaName = "Maria";
         int mariaProgression = 0;
 
         public Bitmap Characters_Maria_Bitmap
@@ -307,8 +306,17 @@ namespace TextRPG_Borkenthron
 
         //Jack
         readonly Bitmap jackBM = new Bitmap(@"Characters\Jack.png");
+        readonly Bitmap stuckKitten = new Bitmap(@"Characters\stuckKitten.png");
+        int jackProgression = 0;
+        bool savedKitten = false;
         public Bitmap Characters_JackBM
         { get { return jackBM; } }
+        public Bitmap Characters_StuckKittenBM
+        { get { return stuckKitten; } }
+        public int Characters_JackProgression
+        { get { return jackProgression; } set { jackProgression = value; } }
+        public bool Characters_JacksKittenSaved
+        { get { return savedKitten; } set { savedKitten = value; } }
 
         //Flying Kitten
         readonly Bitmap kittenBM = new Bitmap(@"Characters\Kitten.png");
@@ -317,6 +325,14 @@ namespace TextRPG_Borkenthron
         { get { return kittenBM; } }
         public bool Characters_KittenClicked
         { get { return kittenClicked; } set { kittenClicked = value; } }
+
+        //Jorn
+        readonly Bitmap jornbm = new Bitmap(@"Characters\Jorn.png");
+        int jornProgression = 0;
+        public Bitmap Characters_JornBM
+        { get { return jornbm; } }
+        public int Characters_Jorn_Progression
+        { get { return jornProgression; } set { jornProgression = value; } }
 
 
         //Variables for Specific scenes
