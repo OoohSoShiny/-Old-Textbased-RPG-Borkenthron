@@ -15,7 +15,7 @@ namespace TextRPG_Borkenthron
     {   
         //Allround variables
         Random randomizer = new Random();
-        //
+        
         SoundPlayer musicSoundPlayer = new SoundPlayer(@"Soundfiles\Warm_Light.wav");
         public SoundPlayer Music_Soundplayer
         { get { return musicSoundPlayer; } set { musicSoundPlayer = value; } }
@@ -30,12 +30,6 @@ namespace TextRPG_Borkenthron
         { get { return focusIngameMenu; } set { focusIngameMenu = value; } }
         public bool UserInterface_DialogboxActive
         { get { return focusDialog; } set { focusDialog = value; } }
-
-        //The picb array given to the mothod before opening the dialog box
-        PictureBox[] pictureBoxArray;
-
-        public PictureBox[] Picturebox_Array
-        { get { return pictureBoxArray; } set { pictureBoxArray = value; } }
 
         //The integer to progress in the storyline
         int storyLineProgressor = 1;
@@ -300,28 +294,58 @@ namespace TextRPG_Borkenthron
 
         public Bitmap Characters_Maria_Bitmap
         { get { return mariaBM; } }
-        public string Characters_Maria_Name
-        { get { return mariaName; } }
         public int Characters_Maria_Progression
         { get { return mariaProgression; } set { mariaProgression = value; } }
 
+        //Goblin
+        readonly Bitmap goblinBM = new Bitmap(@"Characters\goblin.png");
+        public Bitmap Characters_GoblinBM
+        { get { return goblinBM; } }
+        int goblinProgression = 0;
+        public int Characters_Goblin_Progression
+        { get { return goblinProgression; } set { goblinProgression = value; } }
+
+        //Jack
+        readonly Bitmap jackBM = new Bitmap(@"Characters\Jack.png");
+        public Bitmap Characters_JackBM
+        { get { return jackBM; } }
+
+        //Flying Kitten
+        readonly Bitmap kittenBM = new Bitmap(@"Characters\Kitten.png");
+        bool kittenClicked = false;
+        public Bitmap Characters_KittenBM
+        { get { return kittenBM; } }
+        public bool Characters_KittenClicked
+        { get { return kittenClicked; } set { kittenClicked = value; } }
+
 
         //Variables for Specific scenes
-
-        //First Scenes
+        
+        //First Scene
         bool collectFlower = false;
+        readonly Bitmap toForest = new Bitmap(@"Icons\ToForest.png");
+        public Bitmap UserInterface_TowardsForest
+        { get { return toForest; } }
         public bool FirstScene_CollectFlower
         { get { return collectFlower; } set { collectFlower = value; } }
         int collectFlowerCount = 0;
         public int FirstScene_CollectFlowerCount
         { get { return collectFlowerCount; } set { collectFlowerCount = value; } }
 
+        //Forest
+        readonly Bitmap forestBackground = new Bitmap(@"Backgrounds\ForestBackground.png");
+        public Bitmap Background_Forest
+        { get { return forestBackground; } }
+
+        //City, CHARACTER SIZE CITY = 50;70
+        readonly Bitmap cityBackground = new Bitmap(@"Backgrounds\villageBackground.png");
+        public Bitmap Background_City
+        { get { return cityBackground; } }
+
         //Bool for Tutorial
         bool tutorialbool = true;
-
         public bool Tutorial_Bool
         { get { return tutorialbool; } set { tutorialbool = value; } }
-
         int tutorialCounter = 0;
         public int Tutorial_TimeCounter
         { get { return tutorialCounter; } set { tutorialCounter = value; } }

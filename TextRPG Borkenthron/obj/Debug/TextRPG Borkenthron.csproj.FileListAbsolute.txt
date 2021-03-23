@@ -25,5 +25,5 @@ C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\T
 C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.exe
 C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG Borkenthron.pdb
 C:\Users\Nutzer\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.IngameMenu.resources
-C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Dialogbox.resources
 C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.IngameMenu.resources
+C:\Users\stbargholz\source\repos\TextRPG Borkenthron\TextRPG Borkenthron\obj\Debug\TextRPG_Borkenthron.Main_Dialog.resources

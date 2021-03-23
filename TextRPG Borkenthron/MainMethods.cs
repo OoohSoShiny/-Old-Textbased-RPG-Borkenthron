@@ -95,13 +95,9 @@ namespace TextRPG_Borkenthron
             int oldValue = Int32.Parse(breakUpString[1]);
 
             if (addOrLose == '+')
-            {
-                oldValue += addAmount;
-            }
+            { oldValue += addAmount; }
             else
-            {
-                oldValue -= addAmount;
-            }
+            { oldValue -= addAmount; }
             mainVariables.Items_List[index] = breakUpString[0] + "_" + oldValue.ToString();
         }
         //Method for checking if the item exists at least once
@@ -154,12 +150,54 @@ namespace TextRPG_Borkenthron
                     stream.WriteLine(mainVariables.Items_ChickenLeg);
                     stream.WriteLine(mainVariables.Items_Mirror);
                     stream.WriteLine(mainVariables.Items_GiantNut);
+                    stream.WriteLine(mainVariables.Items_SingleFlower);
 
                     MessageBox.Show("Speichern Erfolgreich", "Erfolg");
                     stream.Close();
                 }
             }
             catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        //reads all information from the textfile
+        public void LoadGameBasic(Form form, bool mainFrameBool, MainFrame mainFrame)
+        {
+            try
+            {
+                using (StreamReader stream = new StreamReader(@"Safe_Files\Save01.txt"))
+                {
+                    mainVariables = new MainVariables();
+
+                    mainVariables.StoryLine_Progress = Int32.Parse(stream.ReadLine());
+                    mainVariables.Character_Name = stream.ReadLine();
+                    mainVariables.Character_Intelligence = Int32.Parse(stream.ReadLine());
+                    mainVariables.Character_Strength = Int32.Parse(stream.ReadLine());
+                    mainVariables.Character_Agility = Int32.Parse(stream.ReadLine());
+                    mainVariables.Character_Health = Int32.Parse(stream.ReadLine());
+                    mainVariables.Character_Crystals = Int32.Parse(stream.ReadLine());
+                    mainVariables.Character_Honor = Int32.Parse(stream.ReadLine());
+                    mainVariables.Items_FlowerCircle = stream.ReadLine();
+                    mainVariables.Items_Sword = stream.ReadLine();
+                    mainVariables.Items_HealthPotion = stream.ReadLine();
+                    mainVariables.Items_FinishedTest = stream.ReadLine();
+                    mainVariables.Items_Rope = stream.ReadLine();
+                    mainVariables.Items_SuperAxe = stream.ReadLine();
+                    mainVariables.Items_ChickenLeg = stream.ReadLine();
+                    mainVariables.Items_Mirror = stream.ReadLine();
+                    mainVariables.Items_GiantNut = stream.ReadLine();
+                    mainVariables.Items_SingleFlower = stream.ReadLine();
+
+                    MessageBox.Show("Laden Erfolgreich", "Erfolg");
+
+                    GameStart game = new GameStart(this, mainVariables, mainFrame);
+                    game.Show();
+                    stream.Close();
+                }
+            }
+
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
@@ -188,46 +226,6 @@ namespace TextRPG_Borkenthron
             { form.Close(); }
         }
 
-        //reads all information from the textfile
-        public void LoadGameBasic(Form form, bool mainFrameBool, MainFrame mainFrame)
-        {
-            try
-            {
-                using (StreamReader stream = new StreamReader(@"Safe_Files\Save01.txt"))
-                {
-                    mainVariables = new MainVariables();
-
-                    mainVariables.StoryLine_Progress = Int32.Parse(stream.ReadLine());
-                    mainVariables.Character_Name = stream.ReadLine();
-                    mainVariables.Character_Intelligence = Int32.Parse(stream.ReadLine());
-                    mainVariables.Character_Strength = Int32.Parse(stream.ReadLine());
-                    mainVariables.Character_Agility = Int32.Parse(stream.ReadLine());
-                    mainVariables.Character_Health = Int32.Parse(stream.ReadLine());
-                    mainVariables.Character_Crystals = Int32.Parse(stream.ReadLine());
-                    mainVariables.Character_Honor = Int32.Parse(stream.ReadLine());
-                    mainVariables.Items_FlowerCircle = stream.ReadLine();
-                    mainVariables.Items_Sword = stream.ReadLine();
-                    mainVariables.Items_HealthPotion = stream.ReadLine();
-                    mainVariables.Items_FinishedTest = stream.ReadLine();
-                    mainVariables.Items_Rope = stream.ReadLine();
-                    mainVariables.Items_SuperAxe = stream.ReadLine();
-                    mainVariables.Items_ChickenLeg = stream.ReadLine();
-                    mainVariables.Items_Mirror = stream.ReadLine();
-                    mainVariables.Items_GiantNut = stream.ReadLine();
-
-                    MessageBox.Show("Laden Erfolgreich", "Erfolg");
-
-                    GameStart game = new GameStart(this, mainVariables, mainFrame);
-                    game.Show();
-                    stream.Close();
-                }
-            }
-
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        }
         //Clearing pictureboxes so they dont overlap with the dialogbox
         public void Clear_All_Pictureboxes(PictureBox[] pictureBoxes)
         {
@@ -246,78 +244,217 @@ namespace TextRPG_Borkenthron
                 pictureBox.Visible = true;
             }
         }
-
+        //Takes a button array and makes em invisible
         public void Clear_All_Buttons(Button[] btnArray)
         {
             foreach(Button button in btnArray)
             {button.Visible = false;}
         }
-        #region Storyline
-        //The main DialogProgressor, takes charactername
-        /*
-         dialogbox.Dialogbox_ButtonOne
-         dialogbox.Dialogbox_ButtonTwo
-         dialogbox.Dialogbox_ButtonThree
-         dialogbox.Dialogbox_ButtonFour
-
-         dialogbox.Dialogbox_Text.Text
-         */
-        public void Dialog_Progression(string name, int option, Dialogbox dialogbox)
+        //takes the given stat & goal and returns of roll was success or not
+        public bool Roll_Stat(int stat, int goal)
         {
-            Button[] btnArray = new Button[] { dialogbox.Dialogbox_ButtonOne, dialogbox.Dialogbox_ButtonTwo, dialogbox.Dialogbox_ButtonThree, dialogbox.Dialogbox_ButtonFour };
+            int valuestat = stat;
+            valuestat *= 10;
+            valuestat += mainVariables.Random_Number.Next(1, 101);
+            if(valuestat >= goal)
+            { return true; }
+            else 
+            { return false; }
             
-            switch(name)
+        }
+        private void End_Dialog(Main_Dialog _Dialog)
+        {
+            mainVariables.UserInterface_DialogboxActive = false;
+            _Dialog.Close();
+        }
+
+
+
+        public void Dialog_Progression(string name, int option, Main_Dialog GivenDialogbox, GameStart GivenGameStart, MainFrame givenMainFrame)
+        {
+            Button[] btnArray = new Button[] { GivenDialogbox.Dialogbox_ButtonOne, GivenDialogbox.Dialogbox_ButtonTwo, GivenDialogbox.Dialogbox_ButtonThree, GivenDialogbox.Dialogbox_ButtonFour };
+            GivenDialogbox.Dialogbox_NextTextPicB.Visible = false;
+            switch (name)   // Switch which name is used
             {   
-                //Maries "Story"
+                //Maries Dialog tree
                 case "Marie":
                     
-                dialogbox.Dialogbox_Name.Text = "Marie";                    
+                GivenDialogbox.Dialogbox_Name.Text = "Marie";                    
                 switch(mainVariables.Characters_Maria_Progression)
-                {
-                    case 0:
-                            dialogbox.Dialogbox_Text.Text = "Hallo " + mainVariables.Character_Name + ", wir haben uns lange nicht gesehen. Ich habe gehört du gehst" +
+                {   //First talk
+                    case 0: //<== Check for progression meter
+                            GivenDialogbox.Dialogbox_Text.Text = "Hallo " + mainVariables.Character_Name + ", wir haben uns lange nicht gesehen. Ich habe gehört du gehst" +
                                 " heute in den Waldtempel. Wenn du willst könnte ich dir helfen, eine Opfergabe zu basteln.";
-                            dialogbox.Dialogbox_ButtonOne.Visible = true;
-                            dialogbox.Dialogbox_ButtonOne.Text = "Ja, das wäre sehr freundlich.";
-                            dialogbox.Dialogbox_ButtonTwo.Visible = true;
-                            dialogbox.Dialogbox_ButtonTwo.Text = "Nein danke, ich komme zurecht.";
+                            GivenDialogbox.Dialogbox_ButtonOne.Visible = true;
+                            GivenDialogbox.Dialogbox_ButtonOne.Text = "Ja, das wäre sehr freundlich.";
+                            GivenDialogbox.Dialogbox_ButtonTwo.Visible = true;
+                            GivenDialogbox.Dialogbox_ButtonTwo.Text = "Nein danke, ich komme zurecht.";
                             mainVariables.Characters_Maria_Progression++;
                     break;
                         
                     case 1:
-                        switch (option)
-                        {   
+                            switch (option)     //<== Check which button was pressed
+                            {
+                                    case 0:
+                                        GivenDialogbox.Dialogbox_Text.Text = "Ja?";
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    break;
                             case 1:
                                     Clear_All_Buttons(btnArray);
-                                    dialogbox.Dialogbox_Text.Text = "Du findest hier einige Blumen, wenn du sie mir bringst kann ich dir einen Blumenkranz basteln. Wenn du 10 gesammelt hast reicht es.";
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Du findest hier einige Blumen, wenn du sie mir bringst kann ich dir einen Blumenkranz basteln. Wenn du 10 gesammelt hast reicht es.";
                                     mainVariables.FirstScene_CollectFlower = true;
                                     mainVariables.Characters_Maria_Progression++;
                             break;
 
                             case 2:
                                     Clear_All_Buttons(btnArray);
-                                    dialogbox.Dialogbox_Text.Text = "Wie du wünschst, ich hoffe, du hast einen schönen Tag vor dir.";
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Wie du wünschst, ich hoffe, du hast einen schönen Tag vor dir.";
                                     mainVariables.Characters_Maria_Progression = 10;
                             break;
                                 default:
-                                    dialogbox.Close();
+                                    End_Dialog(GivenDialogbox);
                                     break;
-                        }
+                            }
                     break;
-                        case 2:
+
+                    case 2:
+                        switch(option)
+                        {
+                            case 0:
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ja?";
+                                    string[] breakUpString = mainVariables.Items_List[9].Split('_');
+                                    int currentValue = Int32.Parse(breakUpString[1]);
+                                    if(currentValue >= 10)
+                                    {
+                                        GivenDialogbox.Dialogbox_ButtonOne.Visible = true;
+                                        GivenDialogbox.Dialogbox_ButtonOne.Text = "Ich habe die Blumen gefunden.";
+                                    }
+                            break;
+
+                            case 1:
+                                    Clear_All_Buttons(btnArray);
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ah! Sehr schön... ich bastel dir einen Blumenkranz. Eine Sache noch... Falls du den Tempel besuchen willst, ich hörte, die Göttin hasst sinnloses Blutvergießen.";
+                                    mainVariables.Characters_Maria_Progression = 10;
+                                    Change_Item_Count(0, 1, '+');
+                                    Change_Item_Count(9, 10, '-');
+                            break;
+
+                            default:
+                                    End_Dialog(GivenDialogbox);
+                                    break;
+                        }    
+                    break;
+                        case 10:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = "Ja?";
                             switch(option)
                             {
-                                case 1:
-                                    break;
-                                default:
-                                    dialogbox.Close();
-                                    break;
-                            }    
+                                case 5:
+                                    End_Dialog(GivenDialogbox);
+                                    break;                                    
+                            }
+                            break;                        
+                    default:
+                            End_Dialog(GivenDialogbox);
                             break;
                 }
                 break;
+
+                //Goblin
+                case "Goblin":
+                    GivenDialogbox.Dialogbox_Name.Text = "Goblin";
+                    switch (mainVariables.Characters_Goblin_Progression)
+                    {
+                        case 0:
+                            GivenDialogbox.Dialogbox_Text.Text = "Ihr seht einen Goblin vor euch. Er hastet auf und ab und wirkt irgendwie traurig, aber es ist immernoch ein gefährlicher Goblin...";
+                            GivenDialogbox.Dialogbox_ButtonOne.Visible = true;   GivenDialogbox.Dialogbox_ButtonOne.Text = "Vorbeischleichen";
+                            GivenDialogbox.Dialogbox_ButtonTwo.Visible = true;   GivenDialogbox.Dialogbox_ButtonTwo.Text = "Ablenken";
+                            GivenDialogbox.Dialogbox_ButtonThree.Visible = true; GivenDialogbox.Dialogbox_ButtonThree.Text = "Angreifen!";
+
+                            if(Check_Item_Above_0(0))
+                            { GivenDialogbox.Dialogbox_ButtonFour.Visible = true; GivenDialogbox.Dialogbox_ButtonFour.Text = "Blumenkranz schenken"; }
+                            mainVariables.Characters_Goblin_Progression++;
+                            break;
+                        //Main Decision in the Goblin tree
+                        case 1:
+                            Clear_All_Buttons(btnArray);
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            mainVariables.Characters_Goblin_Progression++;
+                            switch(option)
+                            {
+                                case 0: //Auf den Goblin klicken(?)
+                                    break;
+                                case 1: //schleichen
+                                    if(Roll_Stat(mainVariables.Character_Agility, 50))
+                                    {GivenDialogbox.Dialogbox_Text.Text = "Der Wald bietet Euch viel Deckung, und Ihr wisst sie zu nutzen. Erfolg! Es geht weiter zur Stadt.";}
+                                    else
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Als du stolperst, und neben dem Goblin zu Boden gehst, fallen ein paar Kristalle zu Boden. Der Goblin nimmt sie und rennt weg, Ihr geht seufzend weiter zur Stadt.";
+                                        mainVariables.Character_Crystals -= 10;
+                                    }
+                                    break;
+                                case 2: //Ablenken
+                                    if(Roll_Stat(mainVariables.Character_Intelligence, 50))
+                                    {GivenDialogbox.Dialogbox_Text.Text = "Ihr werft einen Stein in ein Gebüsch auf der gegenüberliegenden Seite, und während der Goblin damit beschäftigt ist, lauft Ihr weiter zur Stadt. Erfolg!";}
+                                    else
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Ihr versucht einen Stein in ein gegenüberliegendes Gebüsch zu werfen, aber trefft den Goblin. Er rennt zu Euch und Ihr spürt, wie Ihr einen Tritt erleidet, bevor der Goblin abhaut.";
+                                        mainVariables.Character_Health -= 3;
+                                    }
+                                    break;
+                                case 3: //Angreifen
+                                    mainVariables.Character_Honor--;
+                                    if(Roll_Stat(mainVariables.Character_Strength, 30))
+                                    {GivenDialogbox.Dialogbox_Text.Text = "Während Ihr den Goblin selbst zur Seite werft, ruft er Euch etwas in seiner Sprache zu, das Ihr zum Glück nicht versteht. Die Schatten werden dunkler.";}
+                                    else
+                                    {GivenDialogbox.Dialogbox_Text.Text = "Der Goblin tanzt um euch herum, während Ihr versucht ihn zu treffen und zieht beleidigende Grimassen, bevor er lachend verschwindet. Eine Demütigung, und die Schatten werden dunkler.";}
+                                    break;
+                                case 4: //Blumenkranz schenken
+                                    GivenDialogbox.Dialogbox_Text.Text = " \"Oh, vielen Dank! Hier, Ihr dürft dafür das hier haben.\", spricht der Goblin gut gelaunt, und reicht euch eine riesige Nuss. Ihr bedankt euch, und geht weiter Richtung Stadt.";
+                                    Change_Item_Count(8, 1, '+');
+                                    break;
+                            }
+                            //End of Goblin main Choice
+                            break;
+                        case 2:
+                            mainVariables.StoryLine_Progress++;
+                            mainVariables.UserInterface_DialogboxActive = false;
+                            GivenGameStart = new GameStart(this, mainVariables, givenMainFrame);
+                            GivenGameStart.Show();                            
+                            End_Dialog(GivenDialogbox);
+                            break;
+                    }
+                    //end goblin case
+                    break;
+                case "Kitten":
+                    GivenDialogbox.Dialogbox_Name.Text = "Kitten";
+                    switch(option)
+                    {
+                        case 0:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = "Ihr habt das fliegende Kätzchen des Glücks gefunden. Es wirft euch eine Hähnchenkeule zu, und verschwinden dann hinter den Wolken";
+                            Change_Item_Count(6, 1, '+');
+                            mainVariables.Characters_KittenClicked = true;
+                            break;
+                        case 5:
+                            GivenGameStart.Characters_KittenPictureBox.Visible = false;
+                            End_Dialog(GivenDialogbox);
+                            break;
+                    }
+                    //end of the KITTEN statement
+                    break;
+                
+                //start of Jack
+                case "Jack":
+
+                    break;
+                
+            //end of the NAME switch statement
             }
         }
-        #endregion
     }
 }

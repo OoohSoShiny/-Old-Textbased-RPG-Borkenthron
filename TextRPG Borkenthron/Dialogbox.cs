@@ -10,10 +10,12 @@ using System.Windows.Forms;
 
 namespace TextRPG_Borkenthron
 {
-    public partial class Dialogbox : Form
+    public partial class Main_Dialog : Form
     {
         MainVariables mainVariables;
         MainMethods mainMethods;
+        GameStart gameStart;
+        MainFrame mainFrame;
 
         //Labels and buttons so they can be changed in main methods
         string name;
@@ -33,9 +35,12 @@ namespace TextRPG_Borkenthron
         public PictureBox Dialogbox_NextTextPicB
         { get { return picBNextDialog; } set { picBNextDialog = value; } }
 
-        public Dialogbox(MainVariables givenMainVariables, MainMethods givenMainMethods, string givenName)
+        
+        public Main_Dialog(MainVariables givenMainVariables, MainMethods givenMainMethods, string givenName, GameStart GivenGameStart, MainFrame givenMainFrame)
         {
             InitializeComponent();
+            gameStart = GivenGameStart;
+            mainFrame = givenMainFrame;
 
             name = givenName;
             mainVariables = givenMainVariables;
@@ -43,32 +48,23 @@ namespace TextRPG_Borkenthron
 
             mainMethods.Form_Background_Change(this, mainVariables.UserInterface_DialogboxBackground);
             mainMethods.Fill_PictureBox(picBNextDialog, mainVariables.UserInterface_DialogForward);
-            mainMethods.Dialog_Progression(name, 0, this);
+            mainMethods.Dialog_Progression(name, 0, this, gameStart, mainFrame);
         }
 
+        //Buttons zum antworten in dialog trees
         private void btnAnswerOne_Click(object sender, EventArgs e)
-        {
-            mainMethods.Dialog_Progression(name, 1, this);
-        }
+        { mainMethods.Dialog_Progression(name, 1, this, gameStart, mainFrame); }
 
         private void btnAnswerTwo_Click(object sender, EventArgs e)
-        {
-            mainMethods.Dialog_Progression(name, 2, this);
-        }
+        { mainMethods.Dialog_Progression(name, 2, this, gameStart, mainFrame); }
 
         private void btnAnswerThree_Click(object sender, EventArgs e)
-        {
-            mainMethods.Dialog_Progression(name, 3, this);
-        }
+        { mainMethods.Dialog_Progression(name, 3, this, gameStart, mainFrame); }
 
         private void btnAnswerFour_Click(object sender, EventArgs e)
-        {
-            mainMethods.Dialog_Progression(name, 4, this);
-        }
+        { mainMethods.Dialog_Progression(name, 4, this, gameStart, mainFrame); }
 
         private void picBNextDialog_Click(object sender, EventArgs e)
-        {
-            mainMethods.Dialog_Progression(name, 5, this);
-        }
+        { mainMethods.Dialog_Progression(name, 5, this, gameStart, mainFrame); }
     }
 }

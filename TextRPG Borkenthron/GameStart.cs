@@ -17,7 +17,10 @@ namespace TextRPG_Borkenthron
         MainFrame mainFrame;
         Inventory inventory;
         IngameMenu inGameMenu;
-        Dialogbox dialogBox;
+        Main_Dialog main_Dialog;
+
+        public PictureBox Characters_KittenPictureBox
+        { get { return picBKitten; } set { picBKitten = value; } }
 
         //default start when game is loaded via start new game
         public GameStart(MainMethods givenMainMethods, MainVariables givenMainVariables, MainFrame givenMainFrame)
@@ -34,28 +37,54 @@ namespace TextRPG_Borkenthron
             inGameMenu = new IngameMenu(mainVariables, mainMethods, this, mainFrame);
             oneSecondTimer = new Timer();
 
+            try
+            { mainVariables.Music_Soundplayer.Stop(); }
+            catch(Exception ex) { }
+
+            //What is loaded depends on the place, case 1 is starting area
             switch(mainVariables.StoryLine_Progress)
             {
                 case 1:
                     mainMethods.Form_Background_Change(this, mainVariables.FirstScreen_Background);
                     mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
-                    mainMethods.Fill_PictureBox(PicBFlower1, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower2, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower3, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower4, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower5, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower6, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower7, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower8, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower9, mainVariables.Items_SingleFlowerBM);
-                    mainMethods.Fill_PictureBox(PicBFlower10, mainVariables.Items_SingleFlowerBM);
+                    mainMethods.Fill_PictureBox(picBSideCharOne, mainVariables.Characters_Maria_Bitmap); picBSideCharOne.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBGoFront, mainVariables.UserInterface_TowardsForest);
+                    mainMethods.Fill_PictureBox(PicBFlower1, mainVariables.Items_SingleFlowerBM); PicBFlower1.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower2, mainVariables.Items_SingleFlowerBM); PicBFlower2.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower3, mainVariables.Items_SingleFlowerBM); PicBFlower3.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower4, mainVariables.Items_SingleFlowerBM); PicBFlower4.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower5, mainVariables.Items_SingleFlowerBM); PicBFlower5.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower6, mainVariables.Items_SingleFlowerBM); PicBFlower6.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower7, mainVariables.Items_SingleFlowerBM); PicBFlower7.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower8, mainVariables.Items_SingleFlowerBM); PicBFlower8.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower9, mainVariables.Items_SingleFlowerBM); PicBFlower9.Visible = true;
+                    mainMethods.Fill_PictureBox(PicBFlower10, mainVariables.Items_SingleFlowerBM); PicBFlower10.Visible = true;                    
                     break;
-            }            
+            
+            //case 2 is forest
+                case 2:
+                    mainVariables.UserInterface_DialogboxActive = true;
+                    mainMethods.Form_Background_Change(this, mainVariables.Background_Forest);
+                    mainMethods.Fill_PictureBox(picBGoblin, mainVariables.Characters_GoblinBM); picBGoblin.Visible = true;
+                    main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Goblin", this, mainFrame);
+                    main_Dialog.Show();
+                    break;
+            
+            //case 3 is village
+                case 3:
+                    mainMethods.Form_Background_Change(this, mainVariables.Background_City);
+                    mainMethods.Fill_PictureBox(picBJack, mainVariables.Characters_JackBM);
+                    if (!mainVariables.Characters_KittenClicked)
+                    { mainMethods.Fill_PictureBox(picBKitten, mainVariables.Characters_KittenBM); }
+                    break;
+            }
+            mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
             mainMethods.Fill_PictureBox(picBHealth, mainVariables.UserInterface_Heart);
             mainMethods.Fill_PictureBox(PicBMana, mainVariables.UserInterface_Crystal);
             mainMethods.Fill_PictureBox(picBInventory, mainVariables.UserInterface_Inventory);
             mainMethods.Fill_PictureBox(picBMenu, mainVariables.UserInterface_Menu);
-            mainMethods.Fill_PictureBox(picBSideCharOne, mainVariables.Characters_Maria_Bitmap);
+
+            lblUiHealth.Text = mainVariables.Character_Health.ToString();
 
             //Adding items to the itemlist and adding bitmaps for those item in a second List
             mainVariables.Items_List.Add(mainVariables.Items_FlowerCircle); mainVariables.Items_List.Add(mainVariables.Items_HealthPotion); mainVariables.Items_List.Add(mainVariables.Items_Sword);
@@ -68,7 +97,8 @@ namespace TextRPG_Borkenthron
             mainVariables.Items_Bitmap_List.Add(mainVariables.Items_ChickenLegBM); mainVariables.Items_Bitmap_List.Add(mainVariables.Items_MirrorBM); mainVariables.Items_Bitmap_List.Add(mainVariables.Items_GiantNutBm);
             mainVariables.Items_Bitmap_List.Add(mainVariables.Items_SingleFlowerBM);
         }
-
+        
+        //Opens a new inventory up
         private void picBInventory_Click(object sender, EventArgs e)
         {
             inventory = new Inventory(mainMethods, mainVariables, this);
@@ -76,23 +106,18 @@ namespace TextRPG_Borkenthron
             mainVariables.UserInterface_InventoryActive = true;
         }
         
+        //puts other windows in front if user tries to activate main window while other window is open
         private void GameStart_Activated(object sender, EventArgs e)
-        {
-            
+        {            
             if(mainVariables.UserInterface_InventoryActive)
-            {
-                inventory.Activate();
-            }
+            { inventory.Activate(); }
             else if(mainVariables.UserInterface_IngameMenuActive)
-            {
-                inGameMenu.Activate();
-            }
+            { inGameMenu.Activate(); }
             else if(mainVariables.UserInterface_DialogboxActive)
-            {
-                dialogBox.Activate();
-            }
+            { main_Dialog.Activate(); }
         }
 
+        //one second timer, no of use yet
         private void oneSecondTimer_Tick(object sender, EventArgs e)
         {
             mainVariables.Tutorial_TimeCounter++;
@@ -102,31 +127,29 @@ namespace TextRPG_Borkenthron
             }
         }
 
+        //opens ingame menu
         private void picBMenu_Click(object sender, EventArgs e)
         {
             inGameMenu.Show();
             mainVariables.UserInterface_IngameMenuActive = true;
         }
 
+        //Hidden object: Click on health gives all items once 
         private void picBHealth_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < 9; i++)
             { mainMethods.Change_Item_Count(i, 1, '+'); }
         }
 
-        private void PicBMana_Click(object sender, EventArgs e)
-        {
-            mainMethods.Change_Item_Count(1, 1, '+');
-        }
-
+        //Clicking on Marie
         private void picBSideCharOne_Click(object sender, EventArgs e)
         {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Marie", this, mainFrame);
+            main_Dialog.Show();
             mainVariables.UserInterface_DialogboxActive = true;
-            dialogBox = new Dialogbox(mainVariables, mainMethods, "Marie");
-            dialogBox.Show();
         }
 
-        //Flowers that are collectiable
+        //Flowers that are collectable
         #region flowers
         private void PicBFlower1_Click(object sender, EventArgs e)
         {
@@ -218,5 +241,39 @@ namespace TextRPG_Borkenthron
             }
         }
         #endregion
+
+        //Clicking on the Goblin
+        private void picBGoblin_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Marie", this, mainFrame);
+            main_Dialog.Show();
+            mainVariables.UserInterface_DialogboxActive = true;
+        }
+
+        //Going to the forest
+        private void PicBGoFront_Click(object sender, EventArgs e)
+        { 
+            switch (mainVariables.StoryLine_Progress)
+            {
+                case 1:
+                mainVariables.StoryLine_Progress++;
+                GameStart gameStart = new GameStart(mainMethods, mainVariables, mainFrame);
+                gameStart.Show();
+                this.Close();
+                    break;
+            }
+        }
+
+        private void picBKitten_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Kitten", this, mainFrame);
+            main_Dialog.Show();
+        }
+
+        private void picBJack_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Jack", this, mainFrame);
+            main_Dialog.Show();
+        }
     }
 }

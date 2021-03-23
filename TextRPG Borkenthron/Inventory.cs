@@ -34,7 +34,7 @@ namespace TextRPG_Borkenthron
             mainMethods.Form_Background_Change(this, mainVariables.UserInterface_InventoryBackground);
 
             //Filling the inventory slots by going through each item possible, checking if the countvalue is above 0, inventory name list is necessary for the on click
-            //event of each picture box, item count not used yet but if i want to but a label or something on health potions, this might come in handy
+            //event of each picture box, item count not used yet but if i want to put a label or something on health potions, this might come in handy
             int picBWalker = 0;
             for(int i = 0; i < mainVariables.Items_List.Count; i++)
             {
@@ -49,9 +49,10 @@ namespace TextRPG_Borkenthron
             }
         }
 
-        //Inventar schließen
+        //close inventory
         private void picBInventoryClose_Click(object sender, EventArgs e)
         {
+            mainVariables.UserInterface_InventoryActive = false;
             this.Close();
         }
 
@@ -105,8 +106,6 @@ namespace TextRPG_Borkenthron
         {   mainMethods.Inventory_ItemClicked(inventoryNameList[15], picBItemSixteen, 15);  }
 
         private void Inventory_Deactivate(object sender, EventArgs e)
-        {
-            this.Activate();
-        }
+        { this.Activate(); }
     }
 }

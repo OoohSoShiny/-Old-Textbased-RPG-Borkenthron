@@ -1,7 +1,7 @@
 ﻿
 namespace TextRPG_Borkenthron
 {
-    partial class Dialogbox
+    partial class Main_Dialog
     {
         /// <summary>
         /// Required designer variable.
