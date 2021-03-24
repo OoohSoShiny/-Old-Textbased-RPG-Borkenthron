@@ -50,6 +50,20 @@ namespace TextRPG_Borkenthron
             mainMethods.Fill_PictureBox(picBNextDialog, mainVariables.UserInterface_DialogForward);
             mainMethods.Dialog_Progression(name, 0, this, gameStart, mainFrame);
         }
+        public Main_Dialog(MainVariables givenMainVariables, MainMethods givenMainMethods, string givenName, GameStart GivenGameStart, MainFrame givenMainFrame, int optionCall)
+        {
+            InitializeComponent();
+            gameStart = GivenGameStart;
+            mainFrame = givenMainFrame;
+
+            name = givenName;
+            mainVariables = givenMainVariables;
+            mainMethods = givenMainMethods;
+
+            mainMethods.Form_Background_Change(this, mainVariables.UserInterface_DialogboxBackground);
+            mainMethods.Fill_PictureBox(picBNextDialog, mainVariables.UserInterface_DialogForward);
+            mainMethods.Dialog_Progression(name, optionCall, this, gameStart, mainFrame);
+        }
 
         //Buttons zum antworten in dialog trees
         private void btnAnswerOne_Click(object sender, EventArgs e)

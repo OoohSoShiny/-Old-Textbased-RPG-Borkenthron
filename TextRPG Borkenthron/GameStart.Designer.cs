@@ -55,6 +55,13 @@ namespace TextRPG_Borkenthron
             this.picBKitten = new System.Windows.Forms.PictureBox();
             this.picBStuckKitten = new System.Windows.Forms.PictureBox();
             this.picBJorn = new System.Windows.Forms.PictureBox();
+            this.picBArenaEnemy = new System.Windows.Forms.PictureBox();
+            this.PicBLea = new System.Windows.Forms.PictureBox();
+            this.picBLeaWood = new System.Windows.Forms.PictureBox();
+            this.picBVendor = new System.Windows.Forms.PictureBox();
+            this.picBVendorRope = new System.Windows.Forms.PictureBox();
+            this.picBVendorTest = new System.Windows.Forms.PictureBox();
+            this.picBValeria = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBMainHero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicBMana)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBHealth)).BeginInit();
@@ -77,6 +84,13 @@ namespace TextRPG_Borkenthron
             ((System.ComponentModel.ISupportInitialize)(this.picBKitten)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBStuckKitten)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBJorn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBArenaEnemy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBLea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBLeaWood)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBVendor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBVendorRope)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBVendorTest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBValeria)).BeginInit();
             this.SuspendLayout();
             // 
             // picBMainHero
@@ -299,7 +313,7 @@ namespace TextRPG_Borkenthron
             // picBJack
             // 
             this.picBJack.BackColor = System.Drawing.Color.Transparent;
-            this.picBJack.Location = new System.Drawing.Point(88, 164);
+            this.picBJack.Location = new System.Drawing.Point(88, 175);
             this.picBJack.Name = "picBJack";
             this.picBJack.Size = new System.Drawing.Size(50, 70);
             this.picBJack.TabIndex = 21;
@@ -332,7 +346,7 @@ namespace TextRPG_Borkenthron
             // picBJorn
             // 
             this.picBJorn.BackColor = System.Drawing.Color.Transparent;
-            this.picBJorn.Location = new System.Drawing.Point(349, 239);
+            this.picBJorn.Location = new System.Drawing.Point(438, 263);
             this.picBJorn.Name = "picBJorn";
             this.picBJorn.Size = new System.Drawing.Size(50, 70);
             this.picBJorn.TabIndex = 24;
@@ -340,12 +354,93 @@ namespace TextRPG_Borkenthron
             this.picBJorn.Visible = false;
             this.picBJorn.Click += new System.EventHandler(this.picBJorn_Click);
             // 
+            // picBArenaEnemy
+            // 
+            this.picBArenaEnemy.BackColor = System.Drawing.Color.Transparent;
+            this.picBArenaEnemy.Location = new System.Drawing.Point(158, 0);
+            this.picBArenaEnemy.Name = "picBArenaEnemy";
+            this.picBArenaEnemy.Size = new System.Drawing.Size(150, 50);
+            this.picBArenaEnemy.TabIndex = 25;
+            this.picBArenaEnemy.TabStop = false;
+            this.picBArenaEnemy.Visible = false;
+            // 
+            // PicBLea
+            // 
+            this.PicBLea.BackColor = System.Drawing.Color.Transparent;
+            this.PicBLea.Location = new System.Drawing.Point(268, 182);
+            this.PicBLea.Name = "PicBLea";
+            this.PicBLea.Size = new System.Drawing.Size(50, 70);
+            this.PicBLea.TabIndex = 26;
+            this.PicBLea.TabStop = false;
+            this.PicBLea.Visible = false;
+            this.PicBLea.Click += new System.EventHandler(this.PicBLea_Click);
+            // 
+            // picBLeaWood
+            // 
+            this.picBLeaWood.BackColor = System.Drawing.Color.Transparent;
+            this.picBLeaWood.Location = new System.Drawing.Point(232, 251);
+            this.picBLeaWood.Name = "picBLeaWood";
+            this.picBLeaWood.Size = new System.Drawing.Size(30, 30);
+            this.picBLeaWood.TabIndex = 27;
+            this.picBLeaWood.TabStop = false;
+            this.picBLeaWood.Visible = false;
+            this.picBLeaWood.Click += new System.EventHandler(this.picBLeaWood_Click);
+            // 
+            // picBVendor
+            // 
+            this.picBVendor.BackColor = System.Drawing.Color.Transparent;
+            this.picBVendor.Location = new System.Drawing.Point(41, 292);
+            this.picBVendor.Name = "picBVendor";
+            this.picBVendor.Size = new System.Drawing.Size(50, 70);
+            this.picBVendor.TabIndex = 28;
+            this.picBVendor.TabStop = false;
+            this.picBVendor.Visible = false;
+            this.picBVendor.Click += new System.EventHandler(this.picBVendor_Click);
+            // 
+            // picBVendorRope
+            // 
+            this.picBVendorRope.BackColor = System.Drawing.Color.Transparent;
+            this.picBVendorRope.Location = new System.Drawing.Point(97, 321);
+            this.picBVendorRope.Name = "picBVendorRope";
+            this.picBVendorRope.Size = new System.Drawing.Size(30, 30);
+            this.picBVendorRope.TabIndex = 29;
+            this.picBVendorRope.TabStop = false;
+            this.picBVendorRope.Visible = false;
+            // 
+            // picBVendorTest
+            // 
+            this.picBVendorTest.BackColor = System.Drawing.Color.Transparent;
+            this.picBVendorTest.Location = new System.Drawing.Point(5, 341);
+            this.picBVendorTest.Name = "picBVendorTest";
+            this.picBVendorTest.Size = new System.Drawing.Size(30, 30);
+            this.picBVendorTest.TabIndex = 30;
+            this.picBVendorTest.TabStop = false;
+            this.picBVendorTest.Visible = false;
+            // 
+            // picBValeria
+            // 
+            this.picBValeria.BackColor = System.Drawing.Color.Transparent;
+            this.picBValeria.Location = new System.Drawing.Point(361, 315);
+            this.picBValeria.Name = "picBValeria";
+            this.picBValeria.Size = new System.Drawing.Size(50, 70);
+            this.picBValeria.TabIndex = 31;
+            this.picBValeria.TabStop = false;
+            this.picBValeria.Visible = false;
+            this.picBValeria.Click += new System.EventHandler(this.picBValeria_Click);
+            // 
             // GameStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 440);
             this.ControlBox = false;
+            this.Controls.Add(this.picBValeria);
+            this.Controls.Add(this.picBVendorTest);
+            this.Controls.Add(this.picBVendorRope);
+            this.Controls.Add(this.picBVendor);
+            this.Controls.Add(this.picBLeaWood);
+            this.Controls.Add(this.PicBLea);
+            this.Controls.Add(this.picBArenaEnemy);
             this.Controls.Add(this.picBJorn);
             this.Controls.Add(this.picBStuckKitten);
             this.Controls.Add(this.picBKitten);
@@ -397,6 +492,13 @@ namespace TextRPG_Borkenthron
             ((System.ComponentModel.ISupportInitialize)(this.picBKitten)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBStuckKitten)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBJorn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBArenaEnemy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBLea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBLeaWood)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBVendor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBVendorRope)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBVendorTest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBValeria)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,5 +531,12 @@ namespace TextRPG_Borkenthron
         private System.Windows.Forms.PictureBox picBKitten;
         private System.Windows.Forms.PictureBox picBStuckKitten;
         private System.Windows.Forms.PictureBox picBJorn;
+        private System.Windows.Forms.PictureBox picBArenaEnemy;
+        private System.Windows.Forms.PictureBox PicBLea;
+        private System.Windows.Forms.PictureBox picBLeaWood;
+        private System.Windows.Forms.PictureBox picBVendor;
+        private System.Windows.Forms.PictureBox picBVendorRope;
+        private System.Windows.Forms.PictureBox picBVendorTest;
+        private System.Windows.Forms.PictureBox picBValeria;
     }
 }

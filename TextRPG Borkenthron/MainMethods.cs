@@ -157,6 +157,13 @@ namespace TextRPG_Borkenthron
                     stream.WriteLine(mainVariables.Characters_JackProgression.ToString());
                     stream.WriteLine(mainVariables.Characters_KittenClicked.ToString());
                     stream.WriteLine(mainVariables.Characters_JacksKittenSaved.ToString());
+                    stream.WriteLine(mainVariables.Characters_Lea_CutOnce.ToString());
+                    stream.WriteLine(mainVariables.Characters_Lea_ChopCount.ToString());
+                    stream.WriteLine(mainVariables.Characters_Jorn_Progression.ToString());
+                    stream.WriteLine(mainVariables.Characters_Vendor_RopeBought.ToString());
+                    stream.WriteLine(mainVariables.Characters_Vendor_TestBought.ToString());
+                    stream.WriteLine(mainVariables.Characters_Lea_WoodAllowed.ToString());
+                    stream.WriteLine(mainVariables.Characters_ValeriaHelped.ToString());
                    
                     MessageBox.Show("Speichern Erfolgreich", "Erfolg");
                     stream.Close();
@@ -200,6 +207,13 @@ namespace TextRPG_Borkenthron
                     mainVariables.Characters_JackProgression  = Int32.Parse(stream.ReadLine());
                     mainVariables.Characters_KittenClicked = bool.Parse(stream.ReadLine());
                     mainVariables.Characters_JacksKittenSaved = bool.Parse(stream.ReadLine());
+                    mainVariables.Characters_Lea_CutOnce = bool.Parse(stream.ReadLine());
+                    mainVariables.Characters_Lea_ChopCount = Int32.Parse(stream.ReadLine());
+                    mainVariables.Characters_Jorn_Progression = Int32.Parse(stream.ReadLine());
+                    mainVariables.Characters_Vendor_RopeBought = bool.Parse(stream.ReadLine());
+                    mainVariables.Characters_Vendor_TestBought = bool.Parse(stream.ReadLine());
+                    mainVariables.Characters_Lea_WoodAllowed = bool.Parse(stream.ReadLine());
+                    mainVariables.Characters_ValeriaHelped = bool.Parse(stream.ReadLine());
 
                     MessageBox.Show("Laden Erfolgreich", "Erfolg");
 
@@ -504,7 +518,7 @@ namespace TextRPG_Borkenthron
                                 {
                                     GivenDialogbox.Dialogbox_Text.Text = "Grüße euch, werter Wanderer. Mein Name ist Jack, und wenn ihr mir helfen könntet wäre ich euch sehr dankbar. Im Baum dort oben befindet sich eine Katze - würdet Ihr mir helfen, ihr herunter zu helfen? Ein Seil könnte helfen.";
                                     GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Klar, kein Problem.";
-                                    GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Nein, ich bin gerade unterwegs";
+                                    GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Nein, Vielleicht später";
                                 }
                                 else
                                 {
@@ -573,10 +587,343 @@ namespace TextRPG_Borkenthron
                     break;//end stuck kitten
 
                 case "Jorn":
+                    GivenDialogbox.Dialogbox_Name.Text = "Jorn";
+                    GivenGameStart.Characters_KittenPictureBox.Visible = false;
 
-                    break;//END JORN
-            //end of the NAME switch statement
-            }
+                    switch (mainVariables.Characters_Jorn_Progression)
+                    {
+                        case 0:
+                            switch (option)
+                            {
+                                case 0:
+                                    Clear_All_Buttons(btnArray);
+                                    GivenDialogbox.Dialogbox_Text.Text = "Grüße, ich hab schon von Euch gehört, " + mainVariables.Character_Name + ". Dies ist die Arena, drei Kämpfe, verlierst du fliegst du raus. " +
+                                        "Du entscheidest, was mit deinem Gegner passiert, wenn du gewinnst. Der erste Kampf ist ein Wolf. Einmal angefangen musst du alle Kämpfe führen, also sei gut vorbereitet. Machst du mit?";
+                                    GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Ich brauche noch etwas Vorbereitung.";
+                                    GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Ich bin dabei.";
+                                    break;
+                                case 1:
+                                    End_Dialog(GivenDialogbox);
+                                    break;
+                                case 2:
+                                    GivenGameStart.BackgroundImage = mainVariables.Backgrounds_Arena;
+                                    Fill_PictureBox(GivenGameStart.Characters_ArenaEnemy, mainVariables.Characters_ArenaWolf);
+                                    Clear_All_Buttons(btnArray);
+                                    GivenDialogbox.Dialogbox_Name.Text = "Wolf";
+                                    if(Check_Item_Above_0(6))
+                                    {
+                                        Change_Item_Count(6, 1, '-');
+                                        GivenDialogbox.Dialogbox_Text.Text = "Der Wolf sah hungrig aus, doch Ihr konntet ihm ein Hühnchenschenkel zuwerfen. Nun tollt er spielend um euch herum. Die Menge schreit, Ihr sollt dem Wolf ein Ende machen, oder wollt Ihr Gnade walten lassen?";
+                                        GivenDialogbox.Dialogbox_ButtonThree.Visible = true; GivenDialogbox.Dialogbox_ButtonThree.Text = "Gnade walten lassen.";
+                                        GivenDialogbox.Dialogbox_ButtonFour.Visible = true; GivenDialogbox.Dialogbox_ButtonFour.Text = "Den Zuschauern geben, was sie wollen.";
+                                    }
+                                    else if(Roll_Stat(mainVariables.Character_Strength, 80))
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Der Wolf war hungrig, und eure Stärke ohnesgleichen. Nun liegt der Wolf am Boden, und die Menge schreit, Ihr sollt dem Wolf ein Ende machen. Doch der Wolf am Boden berührt Euer Herz.";
+                                        GivenDialogbox.Dialogbox_ButtonThree.Visible = true; GivenDialogbox.Dialogbox_ButtonThree.Text = "Gnade walten lassen.";
+                                        GivenDialogbox.Dialogbox_ButtonFour.Visible = true; GivenDialogbox.Dialogbox_ButtonFour.Text = "Den Zuschauern geben, was sie wollen.";
+                                    }
+                                    else
+                                    {
+                                        GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                        GivenDialogbox.Dialogbox_Text.Text = "Die Stärke und der Hunger des Wolfes ist zuviel für euch. Ihr werdet verletzt, und rennt aus der Arena davon.";
+                                        mainVariables.Character_Health -= 5;
+                                    }
+                                    break;
+                                case 3:
+                                    Clear_All_Buttons(btnArray);
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    mainVariables.Characters_Jorn_Progression++;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ihr meint Dankbarkeit in den Augen des davonlaufenden Wolfes zu sehen, als Ihr Euch weigert, ihm den Rest zu geben. Die Menge buht, doch das Licht in euch wird stärker. Ihr" +
+                                        " bereitet euch auf den zweiten Kampf vor, einen Magier.";
+                                    mainVariables.Character_Honor++;
+                                    break;
+                                case 4:
+                                    Clear_All_Buttons(btnArray);
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    mainVariables.Characters_Jorn_Progression++;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ihr hebt eure Hände, nachdem Ihr mit Eurer Tat fertig seid, und die Massen jubeln. Und trotzdem... Das Licht in Euch schwindet. Ihr bereitet euch auf den" +
+                                        " zweiten Kampf vor, einen Magier.";
+                                    mainVariables.Character_Honor--;
+                                    break;
+                                case 5:
+                                    if(!mainVariables.Characters_JacksKittenSaved)
+                                    { GivenGameStart.Characters_KittenPictureBox.Visible = true; }
+                                    Form_Background_Change(GivenGameStart, mainVariables.Background_City);
+                                    GivenGameStart.Characters_ArenaEnemy.Visible = false;
+                                    End_Dialog(GivenDialogbox);
+                                    break;
+                            }
+                            break; //END FIRST ENCOUNTER ARENA
+                        
+                        case 1://START SECOND ENCOUNTER
+                            Fill_PictureBox(GivenGameStart.Characters_ArenaEnemy, mainVariables.Characters_ArenaMage);
+                            Clear_All_Buttons(btnArray);
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = false;
+                            GivenDialogbox.Dialogbox_Name.Text = "Magier";
+                            switch (option)
+                            {
+                                case 5:
+                                    if(Check_Item_Above_0(7))
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Die Augen des Magiers glühen, und sehen euch voller Verachtung an. Gerade noch rechtzeitig haltet Ihr den Spiegel in die Höhe, um den paralysierenden Blick des" +
+                                            "Magiers abzuwehren. Der Spiegel zerbricht, doch der Magier fällt zu Boden, und erneut ruft die Menge, es zu beenden.";
+                                        GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Gnade walten lassen";
+                                        GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Es beenden.";
+                                    }
+                                    else if(Roll_Stat(mainVariables.Character_Intelligence, 80))
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Der Magier wirkt einen Zauber, doch Ihr kennt ihn auch. \"Malphis Blick der Medusa\" - Ihr flüstert die Gegenworte, und der paralysierende Zauber des Magiers wird auf ihn zurück geworfen." +
+                                            "Erneut ruft die Menge danach, es zu beenden.";
+                                        GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Gnade walten lassen.";
+                                        GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Es beenden.";
+                                    }
+                                    else
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Der Magier spricht einen Zauberspruch, dessen Worte Ihr nicht versteht, und ihm nächsten Moment fallt Ihr" +
+                                            "wie versteinert zu Boden. Ihr seht das Grinsen auf seinem Gesicht, doch winkt er ab, und lässt euch ziehen, mit den Worten \"Meiner nicht würdig.\"";
+                                        GivenDialogbox.Dialogbox_ButtonThree.Visible = true; GivenDialogbox.Dialogbox_ButtonThree.Text = "Gehen.";
+                                    }
+                                    break;
+                                
+                                case 1:
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ihr ignoriert die buhende Menge, und lasst den Magier von dannen ziehen. Er wird wahrscheinlich niemals Euer bester Freund, doch das Licht in euch wird stärker. Der letzte Gegner ist ein... Riesiges Eichhörnchen?";
+                                    mainVariables.Character_Honor++;
+                                    mainVariables.Characters_Jorn_Progression++;
+                                    GivenDialogbox.Dialogbox_ButtonFour.Visible = true; GivenDialogbox.Dialogbox_ButtonFour.Text = "Zum letzten Kampf.";
+                                    break;
+                                case 2:
+                                    GivenDialogbox.Dialogbox_Text.Text = "Der arrogante Magier hat bekommen, was er verdient, und erneut jubelt euch die Menge zu, und einzelne Blumen werden in eure Richtung geworfen. Die Sonne strahlt hell, doch das Licht in euch schwindet. Der nächste Kampf ist ein..." +
+                                        "riesiges Eichhörnchen?";
+                                    mainVariables.Character_Honor--;
+                                    mainVariables.Characters_Jorn_Progression++;
+                                    GivenDialogbox.Dialogbox_ButtonFour.Visible = true; GivenDialogbox.Dialogbox_ButtonFour.Text = "Zum letzten Kampf.";
+                                    break;
+                                case 3:
+                                    if (!mainVariables.Characters_JacksKittenSaved)
+                                    { GivenGameStart.Characters_KittenPictureBox.Visible = true; }
+                                    Form_Background_Change(GivenGameStart, mainVariables.Background_City);
+                                    GivenGameStart.Characters_ArenaEnemy.Visible = false;
+                                    End_Dialog(GivenDialogbox);
+                                    break;
+                            }
+                            break;//END SECOND ENCOUNTER
+                        case 2://START THIRD ENCOUNTER
+                            Fill_PictureBox(GivenGameStart.Characters_ArenaEnemy, mainVariables.Characters_ArenaMage);
+                            Clear_All_Buttons(btnArray);
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = false;
+                            GivenDialogbox.Dialogbox_Name.Text = "Magier";
+                            switch (option)
+                            {
+                                case 4:
+                                    if(Check_Item_Above_0(8))
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Auch wenn das Eichhörnchen zuerst verwirrt ist, zieht Ihr eine gewaltige Nuss aus Eurer Tasche, und legt sie auf den Boden. Das Eichhörnchen beginnt sofort daran zu knabbern, und ist sichtlich" +
+                                            " abgelenkt. Die Menge schreit danach, es zu beenden. Sie wollen Eichhörnchenblut.";
+                                        GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Gnade walten lassen.";
+                                        GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Es beenden.";
+                                    }
+                                    else if(Roll_Stat(mainVariables.Character_Agility, 80))
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Auch wenn das Eichhörnchen versucht euch anzuknabbern, eure agilen Bewegungen weichen Allem aus, und schließlich landet Ihr unbehelligt auf" +
+                                            " dem Rücken des riesigen Nagetiers. Die Menge schreit danach, es zu beenden. Sie wollen Eichhörnchenblut.";
+                                        GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Gnade walten lassen.";
+                                        GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Es beenden.";
+                                    }
+                                    else
+                                    {
+                                        GivenDialogbox.Dialogbox_Text.Text = "Das Eichhörnchen ist zu schnell, und ganz auf euch konzentriert. Ihr bemerkt nur noch einen riesigen, wuschigen Schweif, und ihr werdet" +
+                                            " davon geschleudert. Eure letzte Möglichkeit bleibt zu fliehen. Gedemütigt von einem Eichhörnchen im letzten Kampf spürt Ihr, wie das Licht in euch schwindet.";
+                                        GivenDialogbox.Dialogbox_ButtonThree.Visible = true; GivenDialogbox.Dialogbox_ButtonThree.Text = "Verschwinden";
+                                        mainVariables.Character_Honor--;
+                                    }
+                                    break;
+                                case 1:
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ihr streichelt das Eichhörnchen nochmal, bevor Ihr erhobenen Hauptes die Arena verlasst. Ihr habt Niemandem etwas zu beweisen, und das Licht" +
+                                        " in euch wird stärker.";
+                                    mainVariables.Character_Honor++;
+                                    GivenGameStart.Characters_ArenaEnemy.Visible = false;
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    break;
+                                case 2:
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ihr gebt der Menge, was sie wünscht. Sie jubeln, und sie feiern, und Ihr verbeugt euch, während das Licht in euch schwindet. Es ist Zeit zu gehen.";
+                                    mainVariables.Character_Honor--;
+                                    GivenGameStart.Characters_ArenaEnemy.Visible = false;
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    break;
+                                case 3:
+                                case 5:
+                                    mainVariables.Characters_Jorn_Progression++;
+                                    if (!mainVariables.Characters_JacksKittenSaved)
+                                    { GivenGameStart.Characters_KittenPictureBox.Visible = true; }
+                                    Form_Background_Change(GivenGameStart, mainVariables.Background_City);
+                                    GivenGameStart.Characters_ArenaEnemy.Visible = false;
+                                    End_Dialog(GivenDialogbox);
+                                    break;
+                            }
+                            break; //END THIRD ENCOUNTER
+                        case 3:
+                            switch(option)
+                            {
+                                case 0:
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Mhh Mhh. Es ist wie es ist, Wanderer. Lebt wohl.";
+                                    break;
+                                case 5:
+                                    End_Dialog(GivenDialogbox);
+                                    break;
+                            }
+                            break;
+                    }
+                    break; //END JORN/ARENA
+
+                case "Lea":
+                    Clear_All_Buttons(btnArray);
+                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = false;
+                    GivenDialogbox.Dialogbox_Name.Text = "Lea";
+                    switch(option)
+                    {
+                        case 0:
+                                if (!mainVariables.Characters_Lea_WoodAllowed)
+                                {
+                                    GivenDialogbox.Dialogbox_Text.Text = "Grüße, Fremder. Mein Name ist Lea, ich bin die Holzfällerin in der Gegend. Falls Ihr Interesse habt könnt ihr mir helfen ein wenig Holz zu hacken, ich bezahle auch dafür.";
+                                    GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Klar, warum nicht?";
+                                    GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Gerade nicht.";
+                                }
+                                else
+                                {
+                                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenDialogbox.Dialogbox_Text.Text = "Danke nochmal für die Hilfe. Bearbeitet einfach das Holz hier, und ich gebe euch eine angemessene Bezahlung.";
+                                }
+
+                            break;
+                        case 1:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = "Vielen Dank! Hier, nehmt diese Axt und fang an den Stapel zu bearbeiten. Sobald Ihr etwas erledigt hat, gebe ich Euch die Kristalle.";
+                            mainVariables.Characters_Lea_WoodAllowed = true;
+                            break;
+                        case 3:
+                            if(!mainVariables.Characters_Lea_CutOnce)
+                            {
+                                mainVariables.Characters_Lea_CutOnce = true;
+                                GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                GivenDialogbox.Dialogbox_Text.Text = "\"Hier sind die Kristalle\", Lea legt euch einige Kristalle in eure Hand. \"Ich kann gern weitere Hilfe gebrauchen, ich zahl auch weiter\"." +
+                                    " Euch durchströmt das gute Gefühl harter, ehrlicher Arbeit, und das Licht in euch strahlt heller.";
+                                mainVariables.Character_Crystals += 5;
+                                mainVariables.Character_Honor++;
+                            }
+                            else
+                            {
+                                GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                GivenDialogbox.Dialogbox_Text.Text = "\"Hier sind die Kristalle\", Lea legt euch einige Kristalle in eure Hand. \"Ich kann gern weitere Hilfe gebrauchen, ich zahl auch weiter\".";
+                                mainVariables.Character_Crystals += 5;
+                            }
+                            break;                        
+                        case 2:
+                        case 5:
+                            End_Dialog(GivenDialogbox);
+                            break;
+                    }
+                    break; //End Lea
+
+                case "Vendor":
+                    Clear_All_Buttons(btnArray);
+                    GivenDialogbox.Dialogbox_Name.Text = "Ladeninhober";
+                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                    if (!mainVariables.Characters_Vendor_RopeBought)
+                    {GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Seil kaufen (15 Kristalle)"; }
+                    else if (!mainVariables.Characters_Vendor_TestBought)
+                    {GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Trainingstest kaufen (10 Kristalle)";}
+
+                    switch(option)
+                    {
+                        case 0:
+                            if(!mainVariables.Characters_Vendor_TestBought && !mainVariables.Characters_Vendor_RopeBought)
+                            GivenDialogbox.Dialogbox_Text.Text = "Hohoho, holt euch Seile und Übungstests für Knappen, für die richtige Menge an Kristallen, versteht sich.";
+                            else
+                            { GivenDialogbox.Dialogbox_Text.Text = "Hohoho, leider ausverkauft, vielen Dank für Eure treue Kundschaft."; }
+                            break;
+                        case 1:
+                            if(mainVariables.Character_Crystals >= 15)
+                            {
+                                GivenDialogbox.Dialogbox_Text.Text = "Hohoho, viel Spaß mit dem Seil!";
+                                Change_Item_Count(4, 1, '+');
+                                mainVariables.Characters_Vendor_RopeBought = true;
+                                GivenGameStart.Items_Rope.Visible = false;
+                                mainVariables.Character_Crystals -= 15;
+                                GivenGameStart.UI_Crystal_Label.Text = mainVariables.Character_Crystals.ToString();
+                            }
+                            else
+                            {
+                                GivenDialogbox.Dialogbox_Text.Text = "Hohoho, nicht genug Kristalle. Zu schade.";
+                            }
+                            break;
+                        case 2:
+                            if (mainVariables.Character_Crystals >= 10)
+                            {
+                                GivenDialogbox.Dialogbox_Text.Text = "Hohoho, viel Spaß mit dem Test!";
+                                Change_Item_Count(3, 1, '+');
+                                mainVariables.Characters_Vendor_TestBought = true;
+                                GivenGameStart.Items_FinishedList.Visible = false;
+                                mainVariables.Character_Crystals -= 10;
+                                GivenGameStart.UI_Crystal_Label.Text = mainVariables.Character_Crystals.ToString();
+                            }
+                            else
+                            {
+                                GivenDialogbox.Dialogbox_Text.Text = "Hohoho, nicht genug Kristalle. Zu schade.";
+                            }
+                            break;
+                    }
+                    break; //End VENDOR
+                case "Valeria":
+                    Clear_All_Buttons(btnArray);
+                    GivenDialogbox.Dialogbox_Name.Text = "Valeria";
+                    GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                    
+                    switch (option)
+                    {
+                        case 0:
+                            if(!mainVariables.Characters_ValeriaHelped)
+                            {
+                                GivenDialogbox.Dialogbox_Text.Text = "Ihr müsst mir dabei helfen für den Knappentest zu lernen. Ich lasse euch keine Wahl! " +
+                                    "Ich würde mir ja den Übungsbogen beim Händler holen, aber ich habe keine Kristalle...";
+                                GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Klar, warum nicht?";
+                                GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Gerade nicht.";
+                            }
+                            else
+                            {GivenDialogbox.Dialogbox_Text.Text = "Danke für Eure Hilfe! Ich bin mir sicher, nun kann ich es schaffen.";}
+                            break;
+                        case 1:
+                            if(Check_Item_Above_0(3))
+                            {
+                                Change_Item_Count(3, 1, '-');
+                                GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                GivenDialogbox.Dialogbox_Text.Text = "Mit dem Testzettel seid Ihr ohne weiteres in Lage, für den Knappentest mit Valeria zu üben. Hey, vielleicht solltet " +
+                                    "Ihr auch zum Knappen werden? Das Licht in euch wird stärker!";
+                                mainVariables.Character_Honor++;
+                                mainVariables.Characters_ValeriaHelped = true;
+                            }
+                            else if(Roll_Stat(mainVariables.Character_Intelligence, 80))
+                            {
+                                GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                GivenDialogbox.Dialogbox_Text.Text = "Ihr erinnert euch daran, in eurer Freizeit mal für diesen Test gelernt zu haben. Ihr konntet Valeria dabei helfen, und das Licht" +
+                                    " in euch wird stärker!";
+                                mainVariables.Character_Honor++;
+                                mainVariables.Characters_ValeriaHelped = true;
+                            }
+                            else
+                            {
+                                GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                GivenDialogbox.Dialogbox_Text.Text = "Ihr habt zwar keine Ahnung und keinen Plan, doch redet Ihr vor euch hin. Ihr seid euch recht sicher, " +
+                                    "dass Valeria nun durchfallen wird, aber dies ist nicht Euer Problem. Das Licht in euch wird schwächer.";
+                                mainVariables.Character_Honor--;
+                                mainVariables.Characters_ValeriaHelped = true;
+                            }
+                            break;
+                    }
+                    break;
+
+            }//end of the NAME switch statement
         }
     }
 }

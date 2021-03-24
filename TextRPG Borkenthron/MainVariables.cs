@@ -327,13 +327,63 @@ namespace TextRPG_Borkenthron
         { get { return kittenClicked; } set { kittenClicked = value; } }
 
         //Jorn
+        readonly Bitmap wolfBM = new Bitmap(@"Characters\ArenaWolf.png");
         readonly Bitmap jornbm = new Bitmap(@"Characters\Jorn.png");
+        readonly Bitmap jornArenaWallpaper = new Bitmap(@"Backgrounds\ArenaBackground.png");
+        readonly Bitmap evilmageBM = new Bitmap(@"Characters\evilMageArena.png");
+        readonly Bitmap squirrelBM = new Bitmap(@"Characters\ArenaSquirrel.png");
         int jornProgression = 0;
         public Bitmap Characters_JornBM
         { get { return jornbm; } }
         public int Characters_Jorn_Progression
         { get { return jornProgression; } set { jornProgression = value; } }
+        public Bitmap Characters_ArenaWolf
+        { get { return wolfBM; } }
+        public Bitmap Backgrounds_Arena
+        { get { return jornArenaWallpaper; } }
+        public Bitmap Characters_ArenaMage
+        { get { return evilmageBM; } }
+        public Bitmap Characters_ArenaSquirrel
+        { get { return squirrelBM; } }
 
+        //Lea
+        readonly Bitmap leaBM = new Bitmap(@"Characters\Lea.png");
+        readonly Bitmap leaWoodBM = new Bitmap(@"Icons\LeaWoodPile.png");
+        bool leaWoodcutAllowed = false;
+        bool leaWoodcutOnceDone = false;
+        int leaChopAmount = 0;
+
+        public bool Characters_Lea_WoodAllowed
+        { get { return leaWoodcutAllowed; } set { leaWoodcutAllowed = value; } }
+        public bool Characters_Lea_CutOnce
+        { get { return leaWoodcutOnceDone; } set { leaWoodcutOnceDone = value; } }
+        public Bitmap Characters_LeaBM
+        { get { return leaBM; } }
+        public Bitmap Characters_Lea_Wood
+        { get { return leaWoodBM; } }
+        public int Characters_Lea_ChopCount
+        { get { return leaChopAmount; } set { leaChopAmount = value; } }
+
+        //Vendor
+        readonly Bitmap vendorBM = new Bitmap(@"Characters.Vendor.png");
+        bool ropeBought = false;
+        bool testBought = false;
+
+        public Bitmap Characters_VendorBM
+        { get { return vendorBM; } }
+        public bool Characters_Vendor_RopeBought
+        { get { return ropeBought; } set { ropeBought = value; } }
+        public bool Characters_Vendor_TestBought
+        { get { return testBought; } set { testBought = value; } }
+
+        //Valeria
+        readonly Bitmap valeriabm = new Bitmap(@"Characters\Valeria.png");
+        bool valeriaHelped = false;
+
+        public Bitmap Characters_Valeria
+        { get { return valeriabm; } }
+        public bool Characters_ValeriaHelped
+        { get { return valeriaHelped; } set { valeriaHelped = value; } }
 
         //Variables for Specific scenes
         

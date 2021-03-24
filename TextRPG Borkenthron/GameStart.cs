@@ -23,6 +23,18 @@ namespace TextRPG_Borkenthron
         { get { return picBKitten; } set { picBKitten = value; } }
         public PictureBox Characters_StuckKitten
         { get { return picBStuckKitten; } set { picBStuckKitten = value; } }
+        public PictureBox Characters_ArenaEnemy
+        { get { return picBArenaEnemy; } set { picBArenaEnemy = value; } }
+        public PictureBox Items_Rope
+        { get { return picBVendorRope; } set { picBVendorRope = value; } }
+        public PictureBox Items_FinishedList
+        { get { return picBVendorTest; } set { picBVendorTest = value; } }
+
+        public Label UI_Health_Label
+        { get { return lblUiHealth; } set { lblUiHealth = value; } }
+        public Label UI_Crystal_Label
+        { get { return lblUiMana; } set { lblUiMana = value; } }
+
 
         //default start when game is loaded via start new game
         public GameStart(MainMethods givenMainMethods, MainVariables givenMainVariables, MainFrame givenMainFrame)
@@ -84,6 +96,17 @@ namespace TextRPG_Borkenthron
                     { mainMethods.Fill_PictureBox(picBKitten, mainVariables.Characters_KittenBM); }
                     if (!mainVariables.Characters_JacksKittenSaved)
                     { mainMethods.Fill_PictureBox(picBStuckKitten, mainVariables.Characters_StuckKittenBM); }
+                    mainMethods.Fill_PictureBox(picBJorn, mainVariables.Characters_JornBM);
+                    picBJorn.Location = new Point(438,263);
+                    picBJack.Location = new Point(88, 175);
+                    mainMethods.Fill_PictureBox(PicBLea, mainVariables.Characters_LeaBM);
+                    mainMethods.Fill_PictureBox(picBLeaWood, mainVariables.Characters_Lea_Wood);
+                    if(!mainVariables.Characters_Vendor_TestBought)
+                    { mainMethods.Fill_PictureBox(picBVendorTest, mainVariables.Items_FinishedTestBM); }
+                    if(!mainVariables.Characters_Vendor_RopeBought)
+                    { mainMethods.Fill_PictureBox(picBVendorRope, mainVariables.Items_FinishedTestBM); }
+                    mainMethods.Fill_PictureBox(picBValeria, mainVariables.Characters_Valeria);
+
                     break;
             }
             mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
@@ -93,6 +116,7 @@ namespace TextRPG_Borkenthron
             mainMethods.Fill_PictureBox(picBMenu, mainVariables.UserInterface_Menu);
 
             lblUiHealth.Text = mainVariables.Character_Health.ToString();
+            lblUiMana.Text = mainVariables.Character_Crystals.ToString();
             // 0) Flowercircle 1) Health potion 2) Sword 3) Finished test 4) Rope 5) Super axe 6) Chicken leg 7) Mirror 8) Giant nut 9) Single flower
 
             //Adding items to the itemlist and adding bitmaps for those item in a second List
@@ -294,6 +318,39 @@ namespace TextRPG_Borkenthron
         private void picBJorn_Click(object sender, EventArgs e)
         {
             main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Jorn", this, mainFrame);
+            main_Dialog.Show();
+        }
+
+        private void PicBLea_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Lea", this, mainFrame);
+            main_Dialog.Show();
+        }
+
+        private void picBLeaWood_Click(object sender, EventArgs e)
+        {
+            if (mainVariables.Characters_Lea_WoodAllowed)
+            {
+                mainVariables.Characters_Lea_ChopCount++;
+                if (mainVariables.Characters_Lea_ChopCount >= 10)
+                {
+                    mainVariables.Characters_Lea_ChopCount = 0;
+                    main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Lea", this, mainFrame, 3);
+                    main_Dialog.Show();
+                    lblUiMana.Text = mainVariables.Character_Crystals.ToString();
+                }
+            }
+        }
+
+        private void picBVendor_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Vendor", this, mainFrame);
+            main_Dialog.Show();
+        }
+
+        private void picBValeria_Click(object sender, EventArgs e)
+        {
+            main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Valeria", this, mainFrame);
             main_Dialog.Show();
         }
     }
