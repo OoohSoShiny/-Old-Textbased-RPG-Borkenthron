@@ -62,6 +62,7 @@ namespace TextRPG_Borkenthron
             this.picBVendorRope = new System.Windows.Forms.PictureBox();
             this.picBVendorTest = new System.Windows.Forms.PictureBox();
             this.picBValeria = new System.Windows.Forms.PictureBox();
+            this.picBGoddess = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBMainHero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicBMana)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBHealth)).BeginInit();
@@ -91,6 +92,7 @@ namespace TextRPG_Borkenthron
             ((System.ComponentModel.ISupportInitialize)(this.picBVendorRope)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBVendorTest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBValeria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBGoddess)).BeginInit();
             this.SuspendLayout();
             // 
             // picBMainHero
@@ -171,6 +173,7 @@ namespace TextRPG_Borkenthron
             // 
             // picBMenu
             // 
+            this.picBMenu.BackColor = System.Drawing.Color.Transparent;
             this.picBMenu.Location = new System.Drawing.Point(388, 12);
             this.picBMenu.Name = "picBMenu";
             this.picBMenu.Size = new System.Drawing.Size(100, 50);
@@ -302,9 +305,9 @@ namespace TextRPG_Borkenthron
             // picBGoblin
             // 
             this.picBGoblin.BackColor = System.Drawing.Color.Transparent;
-            this.picBGoblin.Location = new System.Drawing.Point(194, 125);
+            this.picBGoblin.Location = new System.Drawing.Point(181, -2);
             this.picBGoblin.Name = "picBGoblin";
-            this.picBGoblin.Size = new System.Drawing.Size(100, 120);
+            this.picBGoblin.Size = new System.Drawing.Size(100, 107);
             this.picBGoblin.TabIndex = 20;
             this.picBGoblin.TabStop = false;
             this.picBGoblin.Visible = false;
@@ -357,9 +360,9 @@ namespace TextRPG_Borkenthron
             // picBArenaEnemy
             // 
             this.picBArenaEnemy.BackColor = System.Drawing.Color.Transparent;
-            this.picBArenaEnemy.Location = new System.Drawing.Point(158, 0);
+            this.picBArenaEnemy.Location = new System.Drawing.Point(168, 0);
             this.picBArenaEnemy.Name = "picBArenaEnemy";
-            this.picBArenaEnemy.Size = new System.Drawing.Size(150, 50);
+            this.picBArenaEnemy.Size = new System.Drawing.Size(150, 88);
             this.picBArenaEnemy.TabIndex = 25;
             this.picBArenaEnemy.TabStop = false;
             this.picBArenaEnemy.Visible = false;
@@ -428,12 +431,23 @@ namespace TextRPG_Borkenthron
             this.picBValeria.Visible = false;
             this.picBValeria.Click += new System.EventHandler(this.picBValeria_Click);
             // 
+            // picBGoddess
+            // 
+            this.picBGoddess.BackColor = System.Drawing.Color.Transparent;
+            this.picBGoddess.Location = new System.Drawing.Point(171, 115);
+            this.picBGoddess.Name = "picBGoddess";
+            this.picBGoddess.Size = new System.Drawing.Size(100, 200);
+            this.picBGoddess.TabIndex = 32;
+            this.picBGoddess.TabStop = false;
+            this.picBGoddess.Visible = false;
+            // 
             // GameStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 440);
             this.ControlBox = false;
+            this.Controls.Add(this.picBGoddess);
             this.Controls.Add(this.picBValeria);
             this.Controls.Add(this.picBVendorTest);
             this.Controls.Add(this.picBVendorRope);
@@ -499,6 +513,7 @@ namespace TextRPG_Borkenthron
             ((System.ComponentModel.ISupportInitialize)(this.picBVendorRope)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBVendorTest)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBValeria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBGoddess)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,5 +553,6 @@ namespace TextRPG_Borkenthron
         private System.Windows.Forms.PictureBox picBVendorRope;
         private System.Windows.Forms.PictureBox picBVendorTest;
         private System.Windows.Forms.PictureBox picBValeria;
+        private System.Windows.Forms.PictureBox picBGoddess;
     }
 }

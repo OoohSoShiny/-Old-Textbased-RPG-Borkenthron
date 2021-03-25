@@ -49,6 +49,7 @@ namespace TextRPG_Borkenthron
             mainMethods.Form_Background_Change(this, mainVariables.UserInterface_DialogboxBackground);
             mainMethods.Fill_PictureBox(picBNextDialog, mainVariables.UserInterface_DialogForward);
             mainMethods.Dialog_Progression(name, 0, this, gameStart, mainFrame);
+            mainVariables.UserInterface_DialogboxActive = true;
         }
         public Main_Dialog(MainVariables givenMainVariables, MainMethods givenMainMethods, string givenName, GameStart GivenGameStart, MainFrame givenMainFrame, int optionCall)
         {

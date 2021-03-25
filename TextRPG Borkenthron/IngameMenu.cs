@@ -61,6 +61,8 @@ namespace TextRPG_Borkenthron
         private void picBLoadGame_Click(object sender, EventArgs e)
         {
             mainMethods.LoadGame(this, false, mainFrame, gamestart);
+            gamestart.Close();
+            this.Close();
         }
 
         private void IngameMenu_Deactivate(object sender, EventArgs e)

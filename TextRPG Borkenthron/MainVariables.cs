@@ -365,7 +365,7 @@ namespace TextRPG_Borkenthron
         { get { return leaChopAmount; } set { leaChopAmount = value; } }
 
         //Vendor
-        readonly Bitmap vendorBM = new Bitmap(@"Characters.Vendor.png");
+        readonly Bitmap vendorBM = new Bitmap(@"Characters\Vendor.png");
         bool ropeBought = false;
         bool testBought = false;
 
@@ -384,6 +384,16 @@ namespace TextRPG_Borkenthron
         { get { return valeriabm; } }
         public bool Characters_ValeriaHelped
         { get { return valeriaHelped; } set { valeriaHelped = value; } }
+
+
+        //Goddess of the forest
+        readonly Bitmap GoddessBM = new Bitmap(@"Characters\QueenOfTheForest.png");
+        readonly Bitmap evaluationBackground = new Bitmap(@"Backgrounds\black.png");
+
+        public Bitmap Characters_Goddess
+        { get { return GoddessBM; } }
+        public Bitmap Backgrounds_Black
+        { get { return evaluationBackground; } }
 
         //Variables for Specific scenes
         
@@ -405,8 +415,14 @@ namespace TextRPG_Borkenthron
 
         //City, CHARACTER SIZE CITY = 50;70
         readonly Bitmap cityBackground = new Bitmap(@"Backgrounds\villageBackground.png");
+        readonly Bitmap cityGoTemple = new Bitmap(@"Icons\goTemple.png");
+        bool acceptTemple = false;
         public Bitmap Background_City
         { get { return cityBackground; } }
+        public Bitmap Icon_CityGoTemple
+        { get { return cityGoTemple; } }
+       public bool City_Accept_Forward
+        { get { return acceptTemple; } set { acceptTemple = value; } }
 
         //Bool for Tutorial
         bool tutorialbool = true;

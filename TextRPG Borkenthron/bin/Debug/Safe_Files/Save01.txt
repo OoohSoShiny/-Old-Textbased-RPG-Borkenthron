@@ -1,11 +1,11 @@
-3
-Thea
-6
-3
-5
-10
-10
 1
+ikj
+3
+3
+3
+10
+10
+0
 Flower Circle_0_Ein wunderschöner Blumenkranz, einer Göttin würdig.
 Sword_0_Ein etwas stumpfes, aber noch brauchbares Schwert
 Health Potion_0_Heiltrank, heilt um 5 Lebenspunkte
@@ -15,10 +15,17 @@ Superaxe_0_Eine mächtige Axt, die aus Holz... Kleinholz macht
 Chicken Leg_0_Ein leckerer Hühnchenschenkel
 Mirror_0_Ein einfacher Handspiegel
 Giant Nut_0_Nüffe? Welfe Nüffe?
-True
+False
 Single Flower_0_Eine einzelne, hübsche Blume
-10
-2
 0
-True
-True
+0
+0
+False
+False
+False
+0
+0
+False
+False
+False
+False

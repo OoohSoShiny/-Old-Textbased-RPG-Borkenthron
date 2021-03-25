@@ -29,11 +29,16 @@ namespace TextRPG_Borkenthron
         { get { return picBVendorRope; } set { picBVendorRope = value; } }
         public PictureBox Items_FinishedList
         { get { return picBVendorTest; } set { picBVendorTest = value; } }
-
+        public PictureBox Characters_Vendor
+        { get { return picBVendor; } set { picBVendor = value; } }
+        public PictureBox Characters_Jorn
+        { get { return picBJorn; } set { picBJorn = value; } }
         public Label UI_Health_Label
         { get { return lblUiHealth; } set { lblUiHealth = value; } }
         public Label UI_Crystal_Label
         { get { return lblUiMana; } set { lblUiMana = value; } }
+        public PictureBox UI_GoSomewhere
+        { get { return PicBGoFront; } set { PicBGoFront = value; } }
 
 
         //default start when game is loaded via start new game
@@ -76,6 +81,7 @@ namespace TextRPG_Borkenthron
                         mainMethods.Fill_PictureBox(PicBFlower8, mainVariables.Items_SingleFlowerBM); PicBFlower8.Visible = true;
                         mainMethods.Fill_PictureBox(PicBFlower9, mainVariables.Items_SingleFlowerBM); PicBFlower9.Visible = true;
                         mainMethods.Fill_PictureBox(PicBFlower10, mainVariables.Items_SingleFlowerBM); PicBFlower10.Visible = true;
+
                     }
                     break;
             
@@ -84,6 +90,7 @@ namespace TextRPG_Borkenthron
                     mainVariables.UserInterface_DialogboxActive = true;
                     mainMethods.Form_Background_Change(this, mainVariables.Background_Forest);
                     mainMethods.Fill_PictureBox(picBGoblin, mainVariables.Characters_GoblinBM); picBGoblin.Visible = true;
+                    picBGoblin.Visible = true;
                     main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Goblin", this, mainFrame);
                     main_Dialog.Show();
                     break;
@@ -104,19 +111,40 @@ namespace TextRPG_Borkenthron
                     if(!mainVariables.Characters_Vendor_TestBought)
                     { mainMethods.Fill_PictureBox(picBVendorTest, mainVariables.Items_FinishedTestBM); }
                     if(!mainVariables.Characters_Vendor_RopeBought)
-                    { mainMethods.Fill_PictureBox(picBVendorRope, mainVariables.Items_FinishedTestBM); }
+                    { mainMethods.Fill_PictureBox(picBVendorRope, mainVariables.Items_RopeBM); }
+                    mainMethods.Fill_PictureBox(picBVendor, mainVariables.Characters_VendorBM);
                     mainMethods.Fill_PictureBox(picBValeria, mainVariables.Characters_Valeria);
+                    mainMethods.Fill_PictureBox(PicBGoFront, mainVariables.Icon_CityGoTemple);
 
                     break;
-            }
-            mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
-            mainMethods.Fill_PictureBox(picBHealth, mainVariables.UserInterface_Heart);
-            mainMethods.Fill_PictureBox(PicBMana, mainVariables.UserInterface_Crystal);
-            mainMethods.Fill_PictureBox(picBInventory, mainVariables.UserInterface_Inventory);
-            mainMethods.Fill_PictureBox(picBMenu, mainVariables.UserInterface_Menu);
+                //case 4 is the ending  //<5 //>= 5 && < 9 // 8<
+                case 4:
 
-            lblUiHealth.Text = mainVariables.Character_Health.ToString();
-            lblUiMana.Text = mainVariables.Character_Crystals.ToString();
+                    mainMethods.Fill_PictureBox(picBGoddess, mainVariables.Characters_Goddess);
+                    mainMethods.Form_Background_Change(this, mainVariables.Backgrounds_Black);
+                    if(mainVariables.Character_Honor < 5)
+                    {
+                        main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Goddess", this, mainFrame, 11);
+                        main_Dialog.Show();
+                        mainVariables.UserInterface_DialogboxActive = true;
+                    }
+                    else if(mainVariables.Character_Honor > 8)
+                    {
+                        main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Goddess", this, mainFrame, 13);
+                        main_Dialog.Show();
+                        mainVariables.UserInterface_DialogboxActive = true;
+                    }
+                    else
+                    {
+                        main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Goddess", this, mainFrame, 12);
+                        main_Dialog.Show();
+                        mainVariables.UserInterface_DialogboxActive = true;
+                    }
+                    main_Dialog.Location = new Point(1000, 300);
+                    picBGoddess.Location = new Point(171, 115);
+                    break;
+            }
+
             // 0) Flowercircle 1) Health potion 2) Sword 3) Finished test 4) Rope 5) Super axe 6) Chicken leg 7) Mirror 8) Giant nut 9) Single flower
 
             //Adding items to the itemlist and adding bitmaps for those item in a second List
@@ -129,8 +157,24 @@ namespace TextRPG_Borkenthron
             mainVariables.Items_Bitmap_List.Add(mainVariables.Items_FinishedTestBM); mainVariables.Items_Bitmap_List.Add(mainVariables.Items_RopeBM); mainVariables.Items_Bitmap_List.Add(mainVariables.Items_SuperAxeBM);
             mainVariables.Items_Bitmap_List.Add(mainVariables.Items_ChickenLegBM); mainVariables.Items_Bitmap_List.Add(mainVariables.Items_MirrorBM); mainVariables.Items_Bitmap_List.Add(mainVariables.Items_GiantNutBm);
             mainVariables.Items_Bitmap_List.Add(mainVariables.Items_SingleFlowerBM);
+
+            if(mainVariables.StoryLine_Progress == 1 || mainVariables.StoryLine_Progress == 2 || mainVariables.StoryLine_Progress == 3)
+            {
+                Main_UI();
+            }
         }
         
+        private void Main_UI()
+        {
+            mainMethods.Character_PictureBox(mainVariables.Character_Picture, picBMainHero);
+            mainMethods.Fill_PictureBox(picBHealth, mainVariables.UserInterface_Heart);
+            mainMethods.Fill_PictureBox(PicBMana, mainVariables.UserInterface_Crystal);
+            mainMethods.Fill_PictureBox(picBInventory, mainVariables.UserInterface_Inventory);
+            mainMethods.Fill_PictureBox(picBMenu, mainVariables.UserInterface_Menu);
+
+            lblUiHealth.Text = mainVariables.Character_Health.ToString();
+            lblUiMana.Text = mainVariables.Character_Crystals.ToString();
+        }
         //Opens a new inventory up
         private void picBInventory_Click(object sender, EventArgs e)
         {
@@ -283,16 +327,20 @@ namespace TextRPG_Borkenthron
             mainVariables.UserInterface_DialogboxActive = true;
         }
 
-        //Going to the forest
+        //PIC B GO FRONT 
         private void PicBGoFront_Click(object sender, EventArgs e)
-        { 
+        {
             switch (mainVariables.StoryLine_Progress)
             {
                 case 1:
-                mainVariables.StoryLine_Progress++;
-                GameStart gameStart = new GameStart(mainMethods, mainVariables, mainFrame);
-                gameStart.Show();
-                this.Close();
+                    mainVariables.StoryLine_Progress++;
+                    GameStart gameStart = new GameStart(mainMethods, mainVariables, mainFrame);
+                    gameStart.Show();
+                    this.Close();
+                    break;
+                case 3:
+                    main_Dialog = new Main_Dialog(mainVariables, mainMethods, "Ending", this, mainFrame);
+                    main_Dialog.Show();
                     break;
             }
         }

@@ -318,6 +318,7 @@ namespace TextRPG_Borkenthron
             { return false; }
             
         }
+        //Closes window
         private void End_Dialog(Main_Dialog _Dialog)
         {
             mainVariables.UserInterface_DialogboxActive = false;
@@ -340,7 +341,8 @@ namespace TextRPG_Borkenthron
                 {   //First talk
                     case 0: //<== Check for progression meter
                             GivenDialogbox.Dialogbox_Text.Text = "Hallo " + mainVariables.Character_Name + ", wir haben uns lange nicht gesehen. Ich habe gehört du gehst" +
-                                " heute in den Waldtempel. Wenn du willst könnte ich dir helfen, ein Geschenk für die Göttin zu basteln.";
+                                " heute in den Waldtempel, um ein Champion der Herrin des Waldes zu werden. Sie nimmt nur ehrenvolle Personen, wenn du möchtest, kann ich dir einen" +
+                                " Blumenkranz basteln, vielleicht hilft er dir auf deinem Wege?";
                             GivenDialogbox.Dialogbox_ButtonOne.Visible = true;
                             GivenDialogbox.Dialogbox_ButtonOne.Text = "Ja, das wäre sehr freundlich.";
                             GivenDialogbox.Dialogbox_ButtonTwo.Visible = true;
@@ -393,7 +395,8 @@ namespace TextRPG_Borkenthron
                             case 1:
                                     Clear_All_Buttons(btnArray);
                                     GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
-                                    GivenDialogbox.Dialogbox_Text.Text = "Ah! Sehr schön... ich bastel dir einen Blumenkranz. Eine Sache noch... Falls du den Tempel besuchen willst, ich hörte, die Göttin hasst sinnloses Blutvergießen.";
+                                    GivenDialogbox.Dialogbox_Text.Text = "Ah! Sehr schön... ich bastel dir einen Blumenkranz. Eine Sache noch... Falls du den Tempel besuchen willst, ich hörte, die Göttin hasst sinnloses Blutvergießen, auch wenn sportliche" +
+                                        " Kämpfe offenbar in Ordnung sind. Seltsam, seltsam.";
                                     mainVariables.Characters_Maria_Progression = 10;
                                     Change_Item_Count(0, 1, '+');
                                     Change_Item_Count(9, 10, '-');
@@ -438,12 +441,10 @@ namespace TextRPG_Borkenthron
                         //Main Decision in the Goblin tree
                         case 1:
                             Clear_All_Buttons(btnArray);
-                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
                             mainVariables.Characters_Goblin_Progression++;
-                            switch(option)
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            switch (option)
                             {
-                                case 0: //Auf den Goblin klicken(?)
-                                    break;
                                 case 1: //schleichen
                                     if(Roll_Stat(mainVariables.Character_Agility, 50))
                                     {GivenDialogbox.Dialogbox_Text.Text = "Der Wald bietet Euch viel Deckung, und Ihr wisst sie zu nutzen. Erfolg! Es geht weiter zum Dorf.";}
@@ -463,6 +464,7 @@ namespace TextRPG_Borkenthron
                                     }
                                     break;
                                 case 3: //Angreifen
+
                                     mainVariables.Character_Honor--;
                                     if(Roll_Stat(mainVariables.Character_Strength, 30))
                                     {GivenDialogbox.Dialogbox_Text.Text = "Während Ihr den Goblin selbst zur Seite werft, ruft er Euch etwas in seiner Sprache zu, das Ihr zum Glück nicht versteht. Ihr habt Erfolg, doch das Licht in euch schwindet.";}
@@ -470,7 +472,7 @@ namespace TextRPG_Borkenthron
                                     {GivenDialogbox.Dialogbox_Text.Text = "Der Goblin tanzt um euch herum, während Ihr versucht ihn zu treffen und zieht beleidigende Grimassen, bevor er lachend verschwindet. Eine Demütigung, doch das Licht in euch schwindet."; }
                                     break;
                                 case 4: //Blumenkranz schenken
-                                    GivenDialogbox.Dialogbox_Text.Text = " \"Oh, vielen Dank! Hier, Ihr dürft dafür das hier haben!\", spricht der Goblin gut gelaunt, und reicht euch eine riesige Nuss. Ihr bedankt euch, und geht weiter Richtung Dorf. Das Licht in euch erstrahlt hell.";
+                                    GivenDialogbox.Dialogbox_Text.Text = " \"Oh, vielen Dank! Hier, Ihr dürft dafür das hier haben!\", spricht der Goblin gut gelaunt, und reicht euch eine riesige Nuss. \"Und ich empfehle euch einen Spiegel mit zu nehmen, falls Ihr in die Arena geht.\" Ihr bedankt euch, und geht weiter Richtung Dorf. Das Licht in euch erstrahlt hell.";
                                     Change_Item_Count(8, 1, '+');
                                     Change_Item_Count(0, 1, '-');
                                     break;
@@ -480,6 +482,7 @@ namespace TextRPG_Borkenthron
                         case 2:
                             mainVariables.StoryLine_Progress++;
                             mainVariables.UserInterface_DialogboxActive = false;
+                            GivenGameStart.Close();
                             GivenGameStart = new GameStart(this, mainVariables, givenMainFrame);
                             GivenGameStart.Show();                            
                             End_Dialog(GivenDialogbox);
@@ -606,7 +609,11 @@ namespace TextRPG_Borkenthron
                                     End_Dialog(GivenDialogbox);
                                     break;
                                 case 2:
+                                    GivenGameStart.Characters_Vendor.Visible = false;
+                                    GivenGameStart.Characters_Jorn.Visible = false;
+                                    GivenGameStart.Characters_KittenPictureBox.Visible = false;
                                     GivenGameStart.BackgroundImage = mainVariables.Backgrounds_Arena;
+                                    GivenGameStart.UI_GoSomewhere.Visible = false;
                                     Fill_PictureBox(GivenGameStart.Characters_ArenaEnemy, mainVariables.Characters_ArenaWolf);
                                     Clear_All_Buttons(btnArray);
                                     GivenDialogbox.Dialogbox_Name.Text = "Wolf";
@@ -712,7 +719,8 @@ namespace TextRPG_Borkenthron
                             Fill_PictureBox(GivenGameStart.Characters_ArenaEnemy, mainVariables.Characters_ArenaMage);
                             Clear_All_Buttons(btnArray);
                             GivenDialogbox.Dialogbox_NextTextPicB.Visible = false;
-                            GivenDialogbox.Dialogbox_Name.Text = "Magier";
+                            GivenDialogbox.Dialogbox_Name.Text = "Riesiges Eichhörnchen";
+                            GivenGameStart.Characters_ArenaEnemy.Image = mainVariables.Characters_ArenaSquirrel;
                             switch (option)
                             {
                                 case 4:
@@ -744,12 +752,22 @@ namespace TextRPG_Borkenthron
                                     mainVariables.Character_Honor++;
                                     GivenGameStart.Characters_ArenaEnemy.Visible = false;
                                     GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenGameStart.Characters_Vendor.Visible = true;
+                                    GivenGameStart.Characters_Jorn.Visible = true;
+                                    if (!mainVariables.Characters_KittenClicked)
+                                    { GivenGameStart.Characters_KittenPictureBox.Visible = false; }
+                                    GivenGameStart.UI_GoSomewhere.Visible = true;
                                     break;
                                 case 2:
                                     GivenDialogbox.Dialogbox_Text.Text = "Ihr gebt der Menge, was sie wünscht. Sie jubeln, und sie feiern, und Ihr verbeugt euch, während das Licht in euch schwindet. Es ist Zeit zu gehen.";
                                     mainVariables.Character_Honor--;
                                     GivenGameStart.Characters_ArenaEnemy.Visible = false;
                                     GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                                    GivenGameStart.Characters_Vendor.Visible = true;
+                                    GivenGameStart.Characters_Jorn.Visible = true;
+                                    if (!mainVariables.Characters_KittenClicked)
+                                    { GivenGameStart.Characters_KittenPictureBox.Visible = false; }
+                                    GivenGameStart.UI_GoSomewhere.Visible = true;
                                     break;
                                 case 3:
                                 case 5:
@@ -808,7 +826,8 @@ namespace TextRPG_Borkenthron
                                 mainVariables.Characters_Lea_CutOnce = true;
                                 GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
                                 GivenDialogbox.Dialogbox_Text.Text = "\"Hier sind die Kristalle\", Lea legt euch einige Kristalle in eure Hand. \"Ich kann gern weitere Hilfe gebrauchen, ich zahl auch weiter\"." +
-                                    " Euch durchströmt das gute Gefühl harter, ehrlicher Arbeit, und das Licht in euch strahlt heller.";
+                                    " Euch durchströmt das gute Gefühl harter, ehrlicher Arbeit, und das Licht in euch strahlt heller.\"Übrigens soll heute in der Arena ein hungriger Wolf sein. Ich frage mich" +
+                                    "ob ein Stück Fleisch hilft?\"";
                                 mainVariables.Character_Crystals += 5;
                                 mainVariables.Character_Honor++;
                             }
@@ -832,13 +851,13 @@ namespace TextRPG_Borkenthron
                     GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
                     if (!mainVariables.Characters_Vendor_RopeBought)
                     {GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Seil kaufen (15 Kristalle)"; }
-                    else if (!mainVariables.Characters_Vendor_TestBought)
+                    if (!mainVariables.Characters_Vendor_TestBought)
                     {GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Trainingstest kaufen (10 Kristalle)";}
 
                     switch(option)
                     {
                         case 0:
-                            if(!mainVariables.Characters_Vendor_TestBought && !mainVariables.Characters_Vendor_RopeBought)
+                            if(!mainVariables.Characters_Vendor_TestBought || !mainVariables.Characters_Vendor_RopeBought)
                             GivenDialogbox.Dialogbox_Text.Text = "Hohoho, holt euch Seile und Übungstests für Knappen, für die richtige Menge an Kristallen, versteht sich.";
                             else
                             { GivenDialogbox.Dialogbox_Text.Text = "Hohoho, leider ausverkauft, vielen Dank für Eure treue Kundschaft."; }
@@ -846,6 +865,7 @@ namespace TextRPG_Borkenthron
                         case 1:
                             if(mainVariables.Character_Crystals >= 15)
                             {
+                                GivenDialogbox.Dialogbox_ButtonOne.Visible = false;
                                 GivenDialogbox.Dialogbox_Text.Text = "Hohoho, viel Spaß mit dem Seil!";
                                 Change_Item_Count(4, 1, '+');
                                 mainVariables.Characters_Vendor_RopeBought = true;
@@ -861,6 +881,7 @@ namespace TextRPG_Borkenthron
                         case 2:
                             if (mainVariables.Character_Crystals >= 10)
                             {
+                                GivenDialogbox.Dialogbox_ButtonTwo.Visible = false;
                                 GivenDialogbox.Dialogbox_Text.Text = "Hohoho, viel Spaß mit dem Test!";
                                 Change_Item_Count(3, 1, '+');
                                 mainVariables.Characters_Vendor_TestBought = true;
@@ -872,6 +893,9 @@ namespace TextRPG_Borkenthron
                             {
                                 GivenDialogbox.Dialogbox_Text.Text = "Hohoho, nicht genug Kristalle. Zu schade.";
                             }
+                            break;
+                        default:
+                            End_Dialog(GivenDialogbox);
                             break;
                     }
                     break; //End VENDOR
@@ -915,10 +939,73 @@ namespace TextRPG_Borkenthron
                             {
                                 GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
                                 GivenDialogbox.Dialogbox_Text.Text = "Ihr habt zwar keine Ahnung und keinen Plan, doch redet Ihr vor euch hin. Ihr seid euch recht sicher, " +
-                                    "dass Valeria nun durchfallen wird, aber dies ist nicht Euer Problem. Das Licht in euch wird schwächer.";
+                                    "dass Valeria nun durchfallen wird, aber dies ist nicht mehr Euer Problem. Das Licht in euch wird schwächer.";
                                 mainVariables.Character_Honor--;
                                 mainVariables.Characters_ValeriaHelped = true;
                             }
+                            break;
+                        default:
+                            End_Dialog(GivenDialogbox);
+                            break;
+                    }
+                    break;
+                case "Goddess":
+                    Clear_All_Buttons(btnArray);
+                    GivenDialogbox.Dialogbox_Name.Text = "Göttin des Waldes";
+                    switch (option)
+                    {
+                        case 11:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = "Ihr habt mich enttäuscht, " + mainVariables.Character_Name + ". Ich habe gehofft ihr wäret zu größerem Berufen," +
+                                " doch eure Selbstsucht, oder euer Wunsch, alles so schnell wie möglich zu beenden, verheißen Euch eine dunkle Zukunft. Ich bin die Schützerin des" +
+                                " Waldes und werde dies nicht zulassen. Fortan lebt Ihr als eine Kreatur des Waldes. Lebt wohl.";
+                            break;
+                        case 12:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = mainVariables.Character_Name + ", Ihr habt euch Mühe gegeben, doch vielleicht war Euch das Glück heute nicht holt." +
+                                " Ich hoffe, dass Ihr nächstes Mal wieder versucht, zu mir zu kommen. Wisset, nichts was Ihr heute erlebt habt war wirklich vom Glück abhängig.";
+                            break;
+                        case 13:
+                            GivenDialogbox.Dialogbox_Text.Text = mainVariables.Character_Name + ", Ihr habt heute viel Gutes getan, und Euch nicht der Dunkelhein anheim fallen lassen." +
+                                " Ich möchte Euch anbieten an meiner statt zu herrschen, und meinen Thron aus Rinde und Borke in Besitz zu nehmen. Aber nur, falls Ihr glaubt, " +
+                                "es mehr zu beherrschen als... Ich.";
+                            GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Natürlich.";
+                            GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Nein, Göttin des Waldes.";
+                            break;
+                        case 1:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = "Ihr habt mich enttäuscht, " + mainVariables.Character_Name + ". So nah am Ziel, und doch beschließt Ihr, auf den letzten Metern" +
+                                " der Dunkelheit anheim zu fallen. Geht, und kehrt nie wieder zurück.";
+                            break;
+                        case 2:
+                            GivenDialogbox.Dialogbox_NextTextPicB.Visible = true;
+                            GivenDialogbox.Dialogbox_Text.Text = "Und so, selbst im Angesicht der letzten Versuchung, bleibt Ihr stark." + mainVariables.Character_Name + ", Ich " +
+                                "erhebe euch zu einem Champion des Waldes und der Menschen, möget Ihr in meinem Willen der Welt betreten, und sie beschützen. Euer Abendteuer... fängt" +
+                                " hier erst an.";
+                            break;
+                        case 5:
+                            Environment.Exit(0);
+                            break;
+                    }
+                    break; //End Goddess
+                case "Ending":
+                        switch(option)
+                    {
+                        case 0:
+                            GivenDialogbox.Dialogbox_Text.Text = "Ihr seht in der Ferne den Dunklen Eingang des Waldtempels. Ihr wisst, dass die Herrin des Waldes über eure Seele richten wird, " +
+                                "eher sie entscheidet, ob Ihr würdig seid. Fühlt Ihr euch bereit, den Tempel zu betreten?";
+                            GivenDialogbox.Dialogbox_ButtonOne.Visible = true; GivenDialogbox.Dialogbox_ButtonOne.Text = "Ich bin bereit.";
+                            GivenDialogbox.Dialogbox_ButtonTwo.Visible = true; GivenDialogbox.Dialogbox_ButtonTwo.Text = "Ich brauche noch mehr Zeit.";
+                            break;
+                        case 1:
+                            mainVariables.StoryLine_Progress++;
+                            GameStart gameStart2 = new GameStart(this, mainVariables, givenMainFrame);
+                            gameStart2.Show();
+                            GivenGameStart.Close(); ;                            
+                            End_Dialog(GivenDialogbox);
+                            break;
+                        case 2:
+                            End_Dialog(GivenDialogbox);
                             break;
                     }
                     break;
